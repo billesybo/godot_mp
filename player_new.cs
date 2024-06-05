@@ -39,9 +39,8 @@ public partial class player_new : CharacterBody2D
 			_camera.Enabled = false;
 			return;
 		}
-
 		
-		// Local pawn
+		// Local pawn!!
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -49,18 +48,31 @@ public partial class player_new : CharacterBody2D
 			velocity.Y += gravity * (float)delta;
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		// if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
+		// 	velocity.Y = JumpVelocity;
+		if (Input.IsActionJustPressed("ui_up") && IsOnFloor())
 			velocity.Y = JumpVelocity;
 
-		//Node2D gunRotation = GetNode<Node2D>("GunRotation"); 
-		_gunRotation.LookAt(GetViewport().GetMousePosition());
+		//_gunRotation.LookAt(_camera.GetViewport().GetMousePosition());
+
+		//GD.Print($"Camera {_camera.GetViewport().GetMousePosition()}");
+		//GD.Print($"Viewport {GetViewport().GetMousePosition()}");
+		//GD.Print($"Player pos : {Position} mouse pos {_camera.GetViewport().GetMousePosition()} diff {_camera.GetViewport().GetMousePosition() - Position}");
+
+		var inverse = _camera.GetCanvasTransform().AffineInverse();
+		var mousePosWorld = inverse * _camera.GetViewport().GetMousePosition();
+		GD.Print($"Player pos : {Position} mouse pos world {mousePosWorld} diff {mousePosWorld - Position}");
+		
+		Vector2 playerToMouse = mousePosWorld - Position;
+		//_gunRotation.LookAt(Position + playerToMouse);
+		_gunRotation.LookAt(mousePosWorld);
+		
+		
 		if (Input.IsActionJustPressed("fire"))
 		{
 			Rpc("FireRPC");
 		}
 
-		// Get the input direction and handle the movement/deceleration.
-		// As good practice, you should replace UI actions with custom gameplay actions.
 		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
 		if (direction != Vector2.Zero)
 		{
