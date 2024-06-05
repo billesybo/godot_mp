@@ -61,7 +61,7 @@ public partial class player_new : CharacterBody2D
 
 		var inverse = _camera.GetCanvasTransform().AffineInverse();
 		var mousePosWorld = inverse * _camera.GetViewport().GetMousePosition();
-		GD.Print($"Player pos : {Position} mouse pos world {mousePosWorld} diff {mousePosWorld - Position}");
+		//GD.Print($"Player pos : {Position} mouse pos world {mousePosWorld} diff {mousePosWorld - Position}");
 		
 		Vector2 playerToMouse = mousePosWorld - Position;
 		//_gunRotation.LookAt(Position + playerToMouse);
