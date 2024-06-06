@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 namespace MPTest;
 
@@ -63,7 +62,7 @@ public partial class player_new : CharacterBody2D
 		var mousePosWorld = inverse * _camera.GetViewport().GetMousePosition();
 		//GD.Print($"Player pos : {Position} mouse pos world {mousePosWorld} diff {mousePosWorld - Position}");
 		
-		Vector2 playerToMouse = mousePosWorld - Position;
+		//Vector2 playerToMouse = mousePosWorld - Position;
 		//_gunRotation.LookAt(Position + playerToMouse);
 		_gunRotation.LookAt(mousePosWorld);
 		
