@@ -21,10 +21,10 @@ text = "Host
 
 [node name="Button_Join" type="Button" parent="."]
 layout_mode = 0
-offset_left = 126.0
-offset_top = 59.0
-offset_right = 218.0
-offset_bottom = 90.0
+offset_left = 435.0
+offset_top = 134.0
+offset_right = 527.0
+offset_bottom = 165.0
 text = "Join"
 
 [node name="Button_Start" type="Button" parent="."]
@@ -50,6 +50,20 @@ offset_right = 50.0
 offset_bottom = 30.0
 text = "Name
 "
+
+[node name="Label_ip" type="Label" parent="."]
+offset_left = 9.0
+offset_top = 135.0
+offset_right = 56.0
+offset_bottom = 158.0
+text = "IP:
+"
+
+[node name="LineEdit_ip" type="LineEdit" parent="."]
+offset_left = 66.0
+offset_top = 132.0
+offset_right = 405.0
+offset_bottom = 163.0
 
 [connection signal="button_down" from="Button_Host" to="." method="_on_button_host_button_down"]
 [connection signal="button_down" from="Button_Join" to="." method="_on_button_join_button_down"]

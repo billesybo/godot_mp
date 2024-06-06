@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Bullet : CharacterBody2D
 {
@@ -30,7 +29,6 @@ public partial class Bullet : CharacterBody2D
 
 	void _on_timer_timeout()
 	{
-		GD.Print("FUUUU");
 		QueueFree();
 	}
 }

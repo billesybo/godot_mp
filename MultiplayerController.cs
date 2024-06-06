@@ -15,6 +15,8 @@ public partial class MultiplayerController : Control
 	private ENetConnection.CompressionMode _compressionMode = ENetConnection.CompressionMode.RangeCoder;
 
 	ENetMultiplayerPeer _peer;
+
+	private LineEdit _ipLineEdit;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -23,6 +25,10 @@ public partial class MultiplayerController : Control
 		Multiplayer.PeerDisconnected += HandlePeerDisconnected;
 		Multiplayer.ConnectedToServer += HandleConnectedToServer;
 		Multiplayer.ConnectionFailed += HandleConnectionFailed;
+
+		GetNode<LineEdit>("LineEdit").Text = TextCollection.GetRandomName(); // TODO Cache
+		_ipLineEdit = GetNode<LineEdit>("LineEdit_ip");
+		_ipLineEdit.Text = _address;
 	}
 
 	// Only client
@@ -86,7 +92,8 @@ public partial class MultiplayerController : Control
 	{
 		GD.Print("JOIN");
 		_peer = new ENetMultiplayerPeer();
-		Error error = _peer.CreateClient(_address, _port);
+		
+		Error error = _peer.CreateClient(_ipLineEdit.Text, _port);
 
 		// if(error != Error.Ok)
 		
