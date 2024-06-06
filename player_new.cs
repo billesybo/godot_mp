@@ -20,11 +20,14 @@ public partial class player_new : CharacterBody2D
 
 	// Cached stuff
 	private Node2D _gunRotation;
+	private AnimatedSprite2D _animatedSprite;
+	
 	public override void _Ready()
 	{
 		GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").SetMultiplayerAuthority(int.Parse(Name)); // TODO CACHE
 		_gunRotation = GetNode<Node2D>("GunRotation");
 		_camera = GetNode<Camera2D>("Camera2D");
+		_animatedSprite = GetNode<AnimatedSprite2D> ("AnimatedSprite2D");
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -47,25 +50,12 @@ public partial class player_new : CharacterBody2D
 			velocity.Y += gravity * (float)delta;
 
 		// Handle Jump.
-		// if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		// 	velocity.Y = JumpVelocity;
 		if (Input.IsActionJustPressed("ui_up") && IsOnFloor())
 			velocity.Y = JumpVelocity;
 
-		//_gunRotation.LookAt(_camera.GetViewport().GetMousePosition());
-
-		//GD.Print($"Camera {_camera.GetViewport().GetMousePosition()}");
-		//GD.Print($"Viewport {GetViewport().GetMousePosition()}");
-		//GD.Print($"Player pos : {Position} mouse pos {_camera.GetViewport().GetMousePosition()} diff {_camera.GetViewport().GetMousePosition() - Position}");
-
 		var inverse = _camera.GetCanvasTransform().AffineInverse();
 		var mousePosWorld = inverse * _camera.GetViewport().GetMousePosition();
-		//GD.Print($"Player pos : {Position} mouse pos world {mousePosWorld} diff {mousePosWorld - Position}");
-		
-		//Vector2 playerToMouse = mousePosWorld - Position;
-		//_gunRotation.LookAt(Position + playerToMouse);
 		_gunRotation.LookAt(mousePosWorld);
-		
 		
 		if (Input.IsActionJustPressed("fire"))
 		{
@@ -89,6 +79,29 @@ public partial class player_new : CharacterBody2D
 		_syncRotation = _gunRotation.RotationDegrees;
 		
 		_camera.Enabled = true;
+		
+		UpdateAnimations(direction);
+	}
+
+	void UpdateAnimations(Vector2 direction)
+	{
+		if(direction.X != 0)
+			_animatedSprite.FlipH = direction.X > 0;
+
+		if (!IsOnFloor())
+		{
+			_animatedSprite.Play("falling");
+			return;
+		}
+
+		if (direction == Vector2.Zero)
+		{
+			_animatedSprite.Play("default");
+		}
+		else
+		{
+			_animatedSprite.Play("run");
+		}
 	}
 
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]

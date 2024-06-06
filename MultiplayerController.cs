@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using MPTest;
 
@@ -17,6 +18,10 @@ public partial class MultiplayerController : Control
 	ENetMultiplayerPeer _peer;
 
 	private LineEdit _ipLineEdit;
+
+	private Label _labelLog;
+	private const int _maxLogSize = 10; 
+	private List<string> _log = new List<string>(_maxLogSize);
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -29,25 +34,28 @@ public partial class MultiplayerController : Control
 		GetNode<LineEdit>("LineEdit").Text = TextCollection.GetRandomName(); // TODO Cache
 		_ipLineEdit = GetNode<LineEdit>("LineEdit_ip");
 		_ipLineEdit.Text = _address;
+
+		_labelLog = GetNode<Label>("Label_log");
+		UpdateLog();
 	}
 
 	// Only client
 	private void HandleConnectionFailed()
 	{
-		GD.Print("CONNECTION FAILED");
+		AddToLog("CONNECTION FAILED");
 	}
 
 	// Only client
 	private void HandleConnectedToServer()
 	{
-		GD.Print("CONNECTED TO SERVER");
+		AddToLog("CONNECTED TO SERVER");
 		RpcId(1,"SendPlayerInfoRPC", GetNode<LineEdit>("LineEdit").Text, Multiplayer.GetUniqueId());
 	}
 
 	// Runs on all
 	private void HandlePeerDisconnected(long id)
 	{
-		GD.Print($"PEER DISCONNECTED {id}");
+		AddToLog($"PEER DISCONNECTED {id}");
 		GameManager.Players.Remove((PlayerInfo)GameManager.Players.Where(i => i.Id == id).First());
 		foreach (player_new player in GetTree().GetNodesInGroup("Player"))
 		{
@@ -62,7 +70,7 @@ public partial class MultiplayerController : Control
 	// Runs on all
 	private void HandlePeerConnected(long id)
 	{
-		GD.Print($"PEER CONNECTED {id}");
+		AddToLog($"PEER CONNECTED {id}");
 	}
 
 	public override void _Process(double delta)
@@ -71,26 +79,26 @@ public partial class MultiplayerController : Control
 	
 	public void _on_button_host_button_down()
 	{
-		GD.Print("HOST");
+		AddToLog("HOST");
 		_peer = new ENetMultiplayerPeer();
 		Error error = _peer.CreateServer(_port, maxClients: 4);
 
 		if (error != Error.Ok)
 		{
-			GD.Print($"ERROR HOSTING {error.ToString()}");
+			AddToLog($"ERROR HOSTING {error.ToString()}");
 			return;
 		}
 		
 		_peer.Host.Compress(_compressionMode);
 		Multiplayer.MultiplayerPeer = _peer;
-		GD.Print("Waiting for players");
+		AddToLog("Waiting for players");
 		// SendPlayerInfoRPC(GetNode<LineEdit>("LineEdit").Text, Multiplayer.GetUniqueId());
 		SendPlayerInfoRPC(GetNode<LineEdit>("LineEdit").Text, 1);
 	}
 	
 	public void _on_button_join_button_down()
 	{
-		GD.Print("JOIN");
+		AddToLog("JOIN");
 		_peer = new ENetMultiplayerPeer();
 		
 		Error error = _peer.CreateClient(_ipLineEdit.Text, _port);
@@ -99,12 +107,12 @@ public partial class MultiplayerController : Control
 		
 		_peer.Host.Compress(_compressionMode);
 		Multiplayer.MultiplayerPeer = _peer;
-		GD.Print("Joining game");
+		AddToLog("Joining game");
 	}
 
 	public void _on_button_start_button_down()
 	{
-		GD.Print("START GAME");
+		AddToLog("START GAME");
 
 		Rpc("LoadStartSceneRPC");
 	}
@@ -114,7 +122,7 @@ public partial class MultiplayerController : Control
 	{
 		foreach (PlayerInfo player in GameManager.Players)
 		{
-			GD.Print($"Player: {player.Name} id : {player.Id}");
+			AddToLog($"Player: {player.Name} id : {player.Id}");
 		}
 		
 		Node2D scene = ResourceLoader.Load<PackedScene>("res://TestScene.tscn").Instantiate<Node2D>();
@@ -152,7 +160,29 @@ public partial class MultiplayerController : Control
 				Rpc("SendPlayerInfoRPC", playerInfo.Name, playerInfo.Id);
 			}
 		}
-		
+	}
+
+	void AddToLog(string entry)
+	{
+		GD.Print(entry);
+		_log.Add(entry);
+		UpdateLog();
+	}
+
+	void UpdateLog()
+	{
+		while (_log.Count > _maxLogSize)
+		{
+			_log.RemoveAt(_log.Count - 1);
+		}
+
+		string text = string.Empty;
+		foreach (string entry in _log)
+		{
+			text += $"{entry}\n";
+		}
+
+		_labelLog.Text = text;
 	}
 }
 
