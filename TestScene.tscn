@@ -1,8 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://bo5jvxf56mmoj"]
+[gd_scene load_steps=26 format=3 uid="uid://bo5jvxf56mmoj"]
 
 [ext_resource type="Script" path="res://SceneManager.cs" id="1_arae6"]
 [ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="1_t18u7"]
 [ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://player.tscn" id="2_xh1df"]
+[ext_resource type="Script" path="res://ParallaxScroll.cs" id="4_0vqci"]
 [ext_resource type="Texture2D" uid="uid://bouoac4k0p7gp" path="res://Sprites/background/parallax_background_layer_1.png" id="4_374eo"]
 [ext_resource type="Texture2D" uid="uid://bce04dwdsxpak" path="res://Sprites/background/parallax_background_layer_2.png" id="5_rx6lg"]
 [ext_resource type="Texture2D" uid="uid://dyom6d7dd6st5" path="res://Sprites/background/parallax_background_layer_3.png" id="6_uesrs"]
@@ -388,6 +389,8 @@ texture = ExtResource("4_374eo")
 position = Vector2(518, 34.01)
 motion_scale = Vector2(0.15, 0.15)
 motion_mirroring = Vector2(2048, 0)
+script = ExtResource("4_0vqci")
+_speed = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 scale = Vector2(4, 3)
