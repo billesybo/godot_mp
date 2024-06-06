@@ -21,6 +21,9 @@ public partial class player_new : CharacterBody2D
 	// Cached stuff
 	private Node2D _gunRotation;
 	private AnimatedSprite2D _animatedSprite;
+
+	private const int StartHealth = 3;
+	private int _health;
 	
 	public override void _Ready()
 	{
@@ -28,6 +31,9 @@ public partial class player_new : CharacterBody2D
 		_gunRotation = GetNode<Node2D>("GunRotation");
 		_camera = GetNode<Camera2D>("Camera2D");
 		_animatedSprite = GetNode<AnimatedSprite2D> ("AnimatedSprite2D");
+
+		_health = StartHealth;
+		UpdateHealthVisuals();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -41,7 +47,8 @@ public partial class player_new : CharacterBody2D
 			_camera.Enabled = false;
 			
 			//GD.Print($"_syncPosition - GlobalPosition {_syncPosition - GlobalPosition}");
-			UpdateAnimations(_syncPosition - GlobalPosition);
+			Vector2 remoteMove = _syncPosition - GlobalPosition;
+			UpdateAnimations(remoteMove, remoteMove);
 			
 			return;
 		}
@@ -84,16 +91,16 @@ public partial class player_new : CharacterBody2D
 		
 		_camera.Enabled = true;
 		
-		UpdateAnimations(direction);
+		UpdateAnimations(direction, Velocity);
 	}
 
-	void UpdateAnimations(Vector2 direction)
+	void UpdateAnimations(Vector2 direction, Vector2 velocity)
 	{
 		if(direction.X != 0)
 			_animatedSprite.FlipH = direction.X > 0;
 
 		//if (!IsOnFloor())
-		if (Velocity.Y < 0)		
+		if (!PrettyMuchZero(velocity.Y)) // < 0))		
 		{
 			_animatedSprite.Play("falling");
 			return;
@@ -127,5 +134,28 @@ public partial class player_new : CharacterBody2D
 	public void ShowName(string name)
 	{
 		GetNode<Label>("Label").Text = name;
+	}
+
+	public void DoDamage()
+	{
+		GD.Print("OUCHIES");
+
+		_health--;
+
+		UpdateHealthVisuals();
+		
+		if(_health <= 0)
+			QueueFree();
+		
+	}
+
+	void UpdateHealthVisuals()
+	{
+		var node = GetNode<Node2D>("HealthIndicator");
+		int count = node.GetChildCount();
+		for (int i = 0; i < count; i++)
+		{
+			((Sprite2D)node.GetChild(i)).Visible = _health > i;
+		}
 	}
 }

@@ -1,10 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://d3me6dahwxn0q"]
+[gd_scene load_steps=31 format=3 uid="uid://d3me6dahwxn0q"]
 
 [ext_resource type="Script" path="res://player_new.cs" id="1_ro20t"]
 [ext_resource type="PackedScene" uid="uid://cmrr4rbaadtay" path="res://bullet.tscn" id="2_jndeb"]
 [ext_resource type="Texture2D" uid="uid://x7pdbymfjtph" path="res://Sprites/Spritesheets/Main Character - Male - Full spritesheet - No Guide.png" id="2_pliky"]
 [ext_resource type="Texture2D" uid="uid://6nppq28ieut1" path="res://Sprites/Famas.png" id="3_fqy1x"]
 [ext_resource type="FontFile" uid="uid://b6nnr8e7tj86m" path="res://Fonts/good times rg.otf" id="5_4xvqg"]
+[ext_resource type="Texture2D" uid="uid://03xqlt5sdymx" path="res://Sprites/greencircle.png" id="6_lay0l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4ct4c"]
 atlas = ExtResource("2_pliky")
@@ -137,7 +138,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wkveu")
 }],
-"loop": true,
+"loop": false,
 "name": &"falling",
 "speed": 5.0
 }, {
@@ -229,3 +230,20 @@ horizontal_alignment = 1
 max_lines_visible = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="HealthIndicator" type="Node2D" parent="."]
+position = Vector2(0, -39)
+
+[node name="Sprite2D" type="Sprite2D" parent="HealthIndicator"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_lay0l")
+
+[node name="Sprite2D2" type="Sprite2D" parent="HealthIndicator"]
+position = Vector2(-8, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_lay0l")
+
+[node name="Sprite2D3" type="Sprite2D" parent="HealthIndicator"]
+position = Vector2(8, 0)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("6_lay0l")
