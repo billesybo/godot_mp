@@ -39,6 +39,11 @@ public partial class player_new : CharacterBody2D
 			GlobalPosition = GlobalPosition.Lerp(_syncPosition, 0.1f); 
 			_gunRotation.RotationDegrees = Mathf.Lerp(_gunRotation.RotationDegrees, _syncRotation, 0.1f);
 			_camera.Enabled = false;
+			
+			//UpdateAnimations(_syncPosition - GlobalPosition);
+			GD.Print($"_syncPosition - GlobalPosition {_syncPosition - GlobalPosition}");
+			UpdateAnimations(_syncPosition - GlobalPosition);
+			
 			return;
 		}
 		
@@ -88,13 +93,15 @@ public partial class player_new : CharacterBody2D
 		if(direction.X != 0)
 			_animatedSprite.FlipH = direction.X > 0;
 
-		if (!IsOnFloor())
+		//if (!IsOnFloor())
+		if (Velocity.Y < 0)		
 		{
 			_animatedSprite.Play("falling");
 			return;
 		}
 
-		if (direction == Vector2.Zero)
+//		if(Mathf.IsEqualApprox(direction.X, 0))
+		if(PrettyMuchZero(direction.X))
 		{
 			_animatedSprite.Play("default");
 		}
@@ -102,6 +109,11 @@ public partial class player_new : CharacterBody2D
 		{
 			_animatedSprite.Play("run");
 		}
+	}
+
+	bool PrettyMuchZero(float number)
+	{
+		return number < 0.004 && number > -0.004;
 	}
 
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
