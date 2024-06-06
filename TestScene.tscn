@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bo5jvxf56mmoj"]
+[gd_scene load_steps=27 format=3 uid="uid://bo5jvxf56mmoj"]
 
 [ext_resource type="Script" path="res://SceneManager.cs" id="1_arae6"]
 [ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="1_t18u7"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://ljy6ysmba06s" path="res://Sprites/buildings/building_03.png" id="10_4ktqi"]
 [ext_resource type="Texture2D" uid="uid://6mlq2vdr7bpy" path="res://Sprites/buildings/building_04.png" id="11_dcj7v"]
 [ext_resource type="Texture2D" uid="uid://dyktfjts1ieln" path="res://Sprites/buildings/building_05.png" id="12_dw0uc"]
+[ext_resource type="PackedScene" uid="uid://ci8ts2iosi271" path="res://enemy.tscn" id="15_8qhhw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
 texture = ExtResource("1_t18u7")
@@ -596,3 +597,5 @@ position = Vector2(41, 329)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D15"]
 shape = SubResource("SegmentShape2D_7kg5j")
 one_way_collision = true
+
+[node name="Enemy" parent="." instance=ExtResource("15_8qhhw")]

@@ -13,4 +13,12 @@ public class TextCollection
         Random random = new Random();
         return _names[GD.RandRange(0, _names.Count - 1)];
     }
+    
+    private static List<string> _ouch = new List<string>()
+        { "Ouch!", "Stop it", "Fuck", "lortejob"};
+    public static string GetRandomOuch()
+    {
+        Random random = new Random();
+        return _ouch[GD.RandRange(0, _ouch.Count - 1)];
+    }
 }

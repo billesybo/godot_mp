@@ -22,16 +22,6 @@ public partial class Bullet : Area2D
 	{
 		Position += _direction * (float)delta * Speed;
 
-		// Vector2 velocity = Velocity;
-		//
-		// velocity = Speed * _direction;
-		// // Add the gravity.
-		// if (!IsOnFloor())
-		// 	velocity.Y += gravity * (float)delta;
-		//
-		//
-		// Velocity = velocity;
-		// MoveAndSlide();
 	}
 
 	void _on_timer_timeout()
@@ -39,6 +29,7 @@ public partial class Bullet : Area2D
 		QueueFree();
 	}
 
+	// TODO this should maybe run on server only, and health should be synced. 
 	void _on_body_entered(Node2D node)
 	{
 		if (_hitSomething)
@@ -48,8 +39,13 @@ public partial class Bullet : Area2D
 		if (node.IsInGroup("Player"))
 		{
 			((player_new)node).DoDamage();
-			
 		}
+
+		if (node.IsInGroup("Enemies"))
+		{
+			((enemy)node).DoDamage();
+		}
+
 		QueueFree();
 	}
 }
