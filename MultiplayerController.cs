@@ -103,13 +103,17 @@ public partial class MultiplayerController : Control
 		
 		Error error = _peer.CreateClient(_ipLineEdit.Text, _port);
 
-		// if(error != Error.Ok)
-		
+		if (error != Error.Ok)
+		{
+			AddToLog("Failed to join!!");
+			return;
+		}
+
 		_peer.Host.Compress(_compressionMode);
 		Multiplayer.MultiplayerPeer = _peer;
 		AddToLog("Joining game");
 	}
-
+	
 	public void _on_button_start_button_down()
 	{
 		AddToLog("START GAME");

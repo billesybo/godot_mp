@@ -10,7 +10,7 @@ public partial class player_new : CharacterBody2D
 	Camera2D _camera;
 
 	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	public const float JumpVelocity = -500.0f;
 
 	private Vector2 _syncPosition;
 	private float _syncRotation;
@@ -40,8 +40,7 @@ public partial class player_new : CharacterBody2D
 			_gunRotation.RotationDegrees = Mathf.Lerp(_gunRotation.RotationDegrees, _syncRotation, 0.1f);
 			_camera.Enabled = false;
 			
-			//UpdateAnimations(_syncPosition - GlobalPosition);
-			GD.Print($"_syncPosition - GlobalPosition {_syncPosition - GlobalPosition}");
+			//GD.Print($"_syncPosition - GlobalPosition {_syncPosition - GlobalPosition}");
 			UpdateAnimations(_syncPosition - GlobalPosition);
 			
 			return;
