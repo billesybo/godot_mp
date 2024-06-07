@@ -109,6 +109,9 @@ public partial class enemy : CharacterBody2D
 
 	void PickAction()
 	{
+		if (!Multiplayer.IsServer()) // Server picks actions, actions sync
+			return;
+		
 		if (GD.RandRange(0, 1) == 0)
 		{
 			_direction = Vector2.Right;

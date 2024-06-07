@@ -478,6 +478,7 @@ position = Vector2(789, -95)
 
 [node name="Bottom" type="StaticBody2D" parent="Collisions/WorldBoundary"]
 position = Vector2(-3, 428)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/WorldBoundary/Bottom"]
 position = Vector2(3, 2)
@@ -485,12 +486,14 @@ shape = SubResource("WorldBoundaryShape2D_wophc")
 
 [node name="Left" type="StaticBody2D" parent="Collisions/WorldBoundary"]
 position = Vector2(-232, 4)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/WorldBoundary/Left"]
 shape = SubResource("WorldBoundaryShape2D_il751")
 
 [node name="Right" type="StaticBody2D" parent="Collisions/WorldBoundary"]
 position = Vector2(1366, 0)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/WorldBoundary/Right"]
 shape = SubResource("WorldBoundaryShape2D_irm0j")
@@ -498,6 +501,7 @@ shape = SubResource("WorldBoundaryShape2D_irm0j")
 [node name="Buildings" type="Node2D" parent="Collisions"]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Collisions/Buildings"]
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D"]
 position = Vector2(737, 334)
@@ -506,6 +510,7 @@ one_way_collision = true
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(1160, 296)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D2"]
 shape = SubResource("SegmentShape2D_b6kbf")
@@ -513,6 +518,7 @@ one_way_collision = true
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(1162, 172)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D3"]
 shape = SubResource("SegmentShape2D_mww10")
@@ -520,6 +526,7 @@ one_way_collision = true
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(1161, 49)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D4"]
 shape = SubResource("SegmentShape2D_mww10")
@@ -527,6 +534,7 @@ one_way_collision = true
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(1161, -91)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D5"]
 shape = SubResource("SegmentShape2D_mww10")
@@ -534,6 +542,7 @@ one_way_collision = true
 
 [node name="StaticBody2D6" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(712, 236)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D6"]
 shape = SubResource("SegmentShape2D_yb1p0")
@@ -541,6 +550,7 @@ one_way_collision = true
 
 [node name="StaticBody2D7" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(712, 132)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D7"]
 shape = SubResource("SegmentShape2D_yb1p0")
@@ -548,6 +558,7 @@ one_way_collision = true
 
 [node name="StaticBody2D8" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(365, 342)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D8"]
 shape = SubResource("SegmentShape2D_b013j")
@@ -555,6 +566,7 @@ one_way_collision = true
 
 [node name="StaticBody2D9" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(365, 261)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D9"]
 shape = SubResource("SegmentShape2D_b013j")
@@ -562,6 +574,7 @@ one_way_collision = true
 
 [node name="StaticBody2D10" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(365, 165)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D10"]
 shape = SubResource("SegmentShape2D_b013j")
@@ -569,6 +582,7 @@ one_way_collision = true
 
 [node name="StaticBody2D11" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(365, 85)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D11"]
 shape = SubResource("SegmentShape2D_b013j")
@@ -576,6 +590,7 @@ one_way_collision = true
 
 [node name="StaticBody2D12" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(365, -11)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D12"]
 shape = SubResource("SegmentShape2D_b013j")
@@ -583,6 +598,7 @@ one_way_collision = true
 
 [node name="StaticBody2D13" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(42, 131)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D13"]
 shape = SubResource("SegmentShape2D_7kg5j")
@@ -590,6 +606,7 @@ one_way_collision = true
 
 [node name="StaticBody2D14" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(42, 239)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D14"]
 shape = SubResource("SegmentShape2D_7kg5j")
@@ -597,6 +614,7 @@ one_way_collision = true
 
 [node name="StaticBody2D15" type="StaticBody2D" parent="Collisions/Buildings"]
 position = Vector2(41, 329)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D15"]
 shape = SubResource("SegmentShape2D_7kg5j")
