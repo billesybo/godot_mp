@@ -22,6 +22,11 @@ public partial class MultiplayerController : Control
 	private Label _labelLog;
 	private const int _maxLogSize = 10; 
 	private List<string> _log = new List<string>(_maxLogSize);
+
+	private Button _hostButton;
+	private Button _startButton;
+	private Button _joinButton;
+	
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -31,18 +36,25 @@ public partial class MultiplayerController : Control
 		Multiplayer.ConnectedToServer += HandleConnectedToServer;
 		Multiplayer.ConnectionFailed += HandleConnectionFailed;
 
+		_hostButton = GetNode<Button>("Button_Host");
+		_startButton = GetNode<Button>("Button_Start");
+		_joinButton = GetNode<Button>("Button_Join");
+
 		GetNode<LineEdit>("LineEdit").Text = TextCollection.GetRandomName(); // TODO Cache
 		_ipLineEdit = GetNode<LineEdit>("LineEdit_ip");
 		_ipLineEdit.Text = _address;
 
 		_labelLog = GetNode<Label>("Label_log");
 		UpdateLog();
+
+		_startButton.Disabled = true;
 	}
 
 	// Only client
 	private void HandleConnectionFailed()
 	{
 		AddToLog("CONNECTION FAILED");
+		_joinButton.Disabled = false;
 	}
 
 	// Only client
@@ -94,6 +106,10 @@ public partial class MultiplayerController : Control
 		AddToLog("Waiting for players");
 		// SendPlayerInfoRPC(GetNode<LineEdit>("LineEdit").Text, Multiplayer.GetUniqueId());
 		SendPlayerInfoRPC(GetNode<LineEdit>("LineEdit").Text, 1);
+
+		_hostButton.Disabled = true;
+		_joinButton.Disabled = true;
+		_startButton.Disabled = false;
 	}
 	
 	public void _on_button_join_button_down()
@@ -112,6 +128,8 @@ public partial class MultiplayerController : Control
 		_peer.Host.Compress(_compressionMode);
 		Multiplayer.MultiplayerPeer = _peer;
 		AddToLog("Joining game");
+		_joinButton.Disabled = true;
+		_hostButton.Disabled = true;
 	}
 	
 	public void _on_button_start_button_down()
