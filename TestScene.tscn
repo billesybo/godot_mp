@@ -461,16 +461,25 @@ layer_0/tile_data = PackedInt32Array(589826, 589824, 6, 1507327, 393216, 12, 144
 [node name="Spawns" type="Node2D" parent="."]
 
 [node name="0" type="Node2D" parent="Spawns" groups=["SpawnPoints"]]
-position = Vector2(621, 72)
+position = Vector2(231, 30)
 
 [node name="1" type="Node2D" parent="Spawns" groups=["SpawnPoints"]]
-position = Vector2(121, 71)
+position = Vector2(-80, 55)
 
 [node name="2" type="Node2D" parent="Spawns" groups=["SpawnPoints"]]
-position = Vector2(1132, 53)
+position = Vector2(1118, -22)
 
 [node name="3" type="Node2D" parent="Spawns" groups=["SpawnPoints"]]
-position = Vector2(789, -95)
+position = Vector2(1109, -181)
+
+[node name="4" type="Node2D" parent="Spawns" groups=["SpawnPoints"]]
+position = Vector2(706, 295)
+
+[node name="5" type="Node2D" parent="Spawns" groups=["SpawnPoints"]]
+position = Vector2(253, 397)
+
+[node name="6" type="Node2D" parent="Spawns" groups=["SpawnPoints"]]
+position = Vector2(318, -103)
 
 [node name="Collisions" type="Node2D" parent="."]
 
