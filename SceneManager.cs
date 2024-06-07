@@ -1,10 +1,21 @@
 using Godot;
 using System;
+using System.Diagnostics;
+using Godot.Collections;
 using MPTest;
 
 public partial class SceneManager : Node2D
 {
 	[Export] private PackedScene _playerScene;
+
+	[Export] private PackedScene _enemyScene;
+
+	
+	
+	private const int WaveSize = 1;
+	private const float WaveIntervalMin = 3f;
+	private const float WaveIntervalMax = 7f;
+	private Timer _enemySpawnTimer;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -27,10 +38,52 @@ public partial class SceneManager : Node2D
 
 			index++;
 		}
+		
+		InitEnemySpawn();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	void InitEnemySpawn()
 	{
+		_enemySpawnTimer = GetNode<Timer>("EnemySpawnTimer");
+		SetEnemySpawnTime();
+		_enemySpawnTimer.Timeout += SpawnNextWave;
+		_enemySpawnTimer.Start();
 	}
+
+	void SetEnemySpawnTime()
+	{
+		_enemySpawnTimer.WaitTime = GD.RandRange(WaveIntervalMin, WaveIntervalMax);
+	}
+
+	void SpawnNextWave()
+	{
+		if (Multiplayer.IsServer())
+		{
+			Array<Node> spawnPoints = GetTree().GetNodesInGroup("SpawnPoints");
+			int count = Mathf.Min(WaveSize, spawnPoints.Count);
+			for (int i = 0; i < count; i++)
+			{
+				Rpc("SpawnEnemy", ((Node2D)spawnPoints[i]).GlobalPosition);
+			}
+		}
+		SetEnemySpawnTime();
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.Authority, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable, CallLocal = true)]
+	void SpawnEnemy(Vector2 position)
+	{
+		if(!Multiplayer.IsServer())
+			GD.Print("CLIENT");
+		else
+		{
+			GD.Print("SERVER");
+		}
+			
+		
+		enemy spawnedEnemy = _enemyScene.Instantiate<enemy>();
+		AddChild(spawnedEnemy);
+
+		spawnedEnemy.GlobalPosition = position;
+	}
+
 }

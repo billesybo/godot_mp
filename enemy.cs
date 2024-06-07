@@ -17,6 +17,7 @@ public partial class enemy : CharacterBody2D
 	private Timer _actionTimer;
 
 	private Vector2 _direction = Vector2.Right;
+	private bool _jumpNextFrame;
 
 	public override void _Ready()
 	{
@@ -39,8 +40,11 @@ public partial class enemy : CharacterBody2D
 			velocity.Y += gravity * (float)delta;
 
 		// // Handle Jump.
-		// if (Input.IsActionJustPressed("ui_accept") && IsOnFloor())
-		// 	velocity.Y = JumpVelocity;
+		if (_jumpNextFrame && IsOnFloor())
+		{
+			_jumpNextFrame = false;
+			velocity.Y = JumpVelocity;
+		}
 
 		// Get the input direction and handle the movement/deceleration.
 		// As good practice, you should replace UI actions with custom gameplay actions.
@@ -63,11 +67,21 @@ public partial class enemy : CharacterBody2D
 
 		_health--;
 
-		if (_health <= 0) // TODO RPC THIS STUFF!!!
+		if (_health <= 0)
 		{
-			Cleanup();
-			QueueFree();
+			// This should probably be RPCd
+			// Cleanup();
+			// QueueFree();
+			Rpc("RemoveEnemyRPC");
 		}
+	}
+
+	[Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
+	void RemoveEnemyRPC()
+	{
+		GD.Print("RUNNING REMOVE!!");
+		Cleanup();
+		QueueFree();
 	}
 
 	void ShowPainText()
@@ -102,6 +116,11 @@ public partial class enemy : CharacterBody2D
 		else
 		{
 			_direction = Vector2.Left;
+		}
+
+		if (GD.Randf() < 0.5f)
+		{
+			_jumpNextFrame = true;
 		}
 	}
 }
