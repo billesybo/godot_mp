@@ -5,7 +5,7 @@ using MPTest;
 public partial class enemy : CharacterBody2D
 {
 	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
+	public const float JumpVelocity = -800.0f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
 	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
@@ -148,7 +148,9 @@ public partial class enemy : CharacterBody2D
 
 	void Attack(Node2D node)
 	{
-		GD.Print("ATTACK ATTACK");
+		if(_isAttacking)
+			return;
+		
 		_isAttacking = true;
 		_animatedSprite.Play("attack");
 		_animatedSprite.AnimationFinished += AttackFinished;

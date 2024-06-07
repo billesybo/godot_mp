@@ -10,7 +10,7 @@ public partial class player_new : CharacterBody2D
 	Camera2D _camera;
 
 	public const float Speed = 300.0f;
-	public const float JumpVelocity = -500.0f;
+	public const float JumpVelocity = -600.0f;
 
 	private Vector2 _syncPosition;
 	private float _syncRotation;
@@ -69,7 +69,7 @@ public partial class player_new : CharacterBody2D
 			velocity.Y += gravity * (float)delta;
 
 		// Handle Jump.
-		if (Input.IsActionJustPressed("ui_up") && IsOnFloor())
+		if (Input.IsActionJustPressed("up") && IsOnFloor())
 			velocity.Y = JumpVelocity;
 
 		var inverse = _camera.GetCanvasTransform().AffineInverse();
@@ -81,7 +81,7 @@ public partial class player_new : CharacterBody2D
 			Rpc("FireRPC");
 		}
 
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+		Vector2 direction = Input.GetVector("left", "right", "up", "down");
 		if (direction != Vector2.Zero)
 		{
 			velocity.X = direction.X * Speed;
@@ -107,14 +107,12 @@ public partial class player_new : CharacterBody2D
 		if(direction.X != 0)
 			_animatedSprite.FlipH = direction.X > 0;
 
-		//if (!IsOnFloor())
-		if (!PrettyMuchZero(velocity.Y)) // < 0))		
+		if (!PrettyMuchZero(velocity.Y))		
 		{
 			_animatedSprite.Play("falling");
 			return;
 		}
 
-//		if(Mathf.IsEqualApprox(direction.X, 0))
 		if(PrettyMuchZero(direction.X))
 		{
 			_animatedSprite.Play("default");
@@ -157,7 +155,6 @@ public partial class player_new : CharacterBody2D
 		{
 			_dead = true;
 			_animatedSprite.Play("death");
-			//_respawnTimer.Stop();
 			_respawnTimer.Start();
 			_respawnTimer.Timeout += Respawn;
 		}
@@ -181,8 +178,9 @@ public partial class player_new : CharacterBody2D
 		_health = StartHealth;
 		_dead = false;
 		Vector2 newPos = GlobalPosition;
-		newPos += Vector2.Up * 200;
+		newPos += Vector2.Up *700;
 		GlobalPosition = newPos;
+		
+		UpdateHealthVisuals();
 	}
-
 }
