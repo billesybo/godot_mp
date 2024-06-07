@@ -10,9 +10,7 @@ public partial class SceneManager : Node2D
 
 	[Export] private PackedScene _enemyScene;
 
-	
-	
-	private const int WaveSize = 1;
+	private const int WaveSize = 0;
 	private const float WaveIntervalMin = 3f;
 	private const float WaveIntervalMax = 7f;
 	private Timer _enemySpawnTimer;
@@ -72,14 +70,6 @@ public partial class SceneManager : Node2D
 	[Rpc(MultiplayerApi.RpcMode.Authority, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable, CallLocal = true)]
 	void SpawnEnemy(Vector2 position)
 	{
-		if(!Multiplayer.IsServer())
-			GD.Print("CLIENT");
-		else
-		{
-			GD.Print("SERVER");
-		}
-			
-		
 		enemy spawnedEnemy = _enemyScene.Instantiate<enemy>();
 		AddChild(spawnedEnemy);
 

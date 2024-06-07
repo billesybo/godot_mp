@@ -24,6 +24,10 @@ public partial class player_new : CharacterBody2D
 
 	private const int StartHealth = 3;
 	private int _health;
+
+	private bool _dead;
+
+	private Timer _respawnTimer;
 	
 	public override void _Ready()
 	{
@@ -31,6 +35,7 @@ public partial class player_new : CharacterBody2D
 		_gunRotation = GetNode<Node2D>("GunRotation");
 		_camera = GetNode<Camera2D>("Camera2D");
 		_animatedSprite = GetNode<AnimatedSprite2D> ("AnimatedSprite2D");
+		_respawnTimer = GetNode<Timer>("RespawnTimer");
 
 		_health = StartHealth;
 		UpdateHealthVisuals();
@@ -38,6 +43,9 @@ public partial class player_new : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (_dead)
+			return;
+		
 		// Remote pawn (wow structure this code, asshole!)
 		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() !=
 			Multiplayer.GetUniqueId()) 
@@ -138,15 +146,21 @@ public partial class player_new : CharacterBody2D
 
 	public void DoDamage()
 	{
-		GD.Print("OUCHIES");
-
+		if (_dead)
+			return;
+		
 		_health--;
 
 		UpdateHealthVisuals();
-		
-		if(_health <= 0)
-			QueueFree();
-		
+
+		if (_health <= 0)
+		{
+			_dead = true;
+			_animatedSprite.Play("death");
+			//_respawnTimer.Stop();
+			_respawnTimer.Start();
+			_respawnTimer.Timeout += Respawn;
+		}
 	}
 
 	void UpdateHealthVisuals()
@@ -158,4 +172,17 @@ public partial class player_new : CharacterBody2D
 			((Sprite2D)node.GetChild(i)).Visible = _health > i;
 		}
 	}
+
+	void Respawn()
+	{
+		_respawnTimer.Timeout -= Respawn;
+		_respawnTimer.Stop();
+		
+		_health = StartHealth;
+		_dead = false;
+		Vector2 newPos = GlobalPosition;
+		newPos += Vector2.Up * 200;
+		GlobalPosition = newPos;
+	}
+
 }
