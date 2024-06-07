@@ -245,6 +245,7 @@ properties/1/spawn = true
 properties/1/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+collision_layer = 5
 script = ExtResource("1_ro20t")
 Bullet = ExtResource("2_jndeb")
 

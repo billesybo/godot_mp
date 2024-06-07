@@ -10,7 +10,7 @@ public partial class SceneManager : Node2D
 
 	[Export] private PackedScene _enemyScene;
 
-	private const int WaveSize = 0;
+	private const int WaveSize = 2;
 	private const float WaveIntervalMin = 3f;
 	private const float WaveIntervalMax = 7f;
 	private Timer _enemySpawnTimer;

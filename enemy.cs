@@ -8,7 +8,7 @@ public partial class enemy : CharacterBody2D
 	public const float JumpVelocity = -400.0f;
 
 	// Get the gravity from the project settings to be synced with RigidBody nodes.
-	public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
+	private float _gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
 
 	private int _health = 3;
 
@@ -18,6 +18,10 @@ public partial class enemy : CharacterBody2D
 
 	private Vector2 _direction = Vector2.Right;
 	private bool _jumpNextFrame;
+	
+	private AnimatedSprite2D _animatedSprite;
+
+	private bool _isAttacking;
 
 	public override void _Ready()
 	{
@@ -26,9 +30,12 @@ public partial class enemy : CharacterBody2D
 		_label = GetNode<Label>("Label");
 		_talkTimer = GetNode<Timer>("Label/Timer");
 		_actionTimer = GetNode<Timer>("ActionTimer");
+		_animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 		
 		_actionTimer.Start();
 		_actionTimer.Timeout += PickAction;
+		
+		UpdateAnimation();
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -37,7 +44,7 @@ public partial class enemy : CharacterBody2D
 
 		// Add the gravity.
 		if (!IsOnFloor())
-			velocity.Y += gravity * (float)delta;
+			velocity.Y += _gravity * (float)delta;
 
 		// // Handle Jump.
 		if (_jumpNextFrame && IsOnFloor())
@@ -58,9 +65,24 @@ public partial class enemy : CharacterBody2D
 			velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
 		}
 
+		_animatedSprite.FlipH = velocity.X < 0;
+
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+
+	void UpdateAnimation()
+	{
+		if (_isAttacking)
+		{
+			_animatedSprite.Play("attack");
+		}
+		else
+		{
+			_animatedSprite.Play("run");
+		}
+	}
+
 	public void DoDamage()
 	{
 		ShowPainText();
@@ -69,9 +91,6 @@ public partial class enemy : CharacterBody2D
 
 		if (_health <= 0)
 		{
-			// This should probably be RPCd
-			// Cleanup();
-			// QueueFree();
 			Rpc("RemoveEnemyRPC");
 		}
 	}
@@ -79,7 +98,6 @@ public partial class enemy : CharacterBody2D
 	[Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
 	void RemoveEnemyRPC()
 	{
-		GD.Print("RUNNING REMOVE!!");
 		Cleanup();
 		QueueFree();
 	}
@@ -89,10 +107,11 @@ public partial class enemy : CharacterBody2D
 		Say(TextCollection.GetRandomOuch());	
 	}
 
-	void Say(string tosay)
+	void Say(string toSay, float chance = 1f)
 	{
-		_label.Text = tosay;
+		_label.Text = toSay;
 		_talkTimer.Start();
+		_talkTimer.Timeout -= HandleSayTimeout;
 		_talkTimer.Timeout += HandleSayTimeout;
 	}
 
@@ -126,4 +145,23 @@ public partial class enemy : CharacterBody2D
 			_jumpNextFrame = true;
 		}
 	}
+
+	void Attack(Node2D node)
+	{
+		GD.Print("ATTACK ATTACK");
+		_isAttacking = true;
+		_animatedSprite.Play("attack");
+		_animatedSprite.AnimationFinished += AttackFinished;
+		UpdateAnimation();
+		((player_new)node).DoDamage();
+	}
+
+	private void AttackFinished()
+	{
+		_animatedSprite.AnimationFinished -= AttackFinished;
+		_isAttacking = false;
+		UpdateAnimation();
+	}
 }
+
+
