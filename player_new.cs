@@ -39,6 +39,8 @@ public partial class player_new : CharacterBody2D
 
 		_health = StartHealth;
 		UpdateHealthVisuals();
+
+		Input.MouseMode = Input.MouseModeEnum.Confined;
 	}
 
 	public override void _PhysicsProcess(double delta)
