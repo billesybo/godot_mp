@@ -10,13 +10,9 @@ public partial class CharacterAudio : Node2D
 
 	}
 
-	public void PlayGunSound()
+	private void PlayGunSound()
 	{
+		//GD.Print("BLAM");
 		_gunSound.Play();
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
 	}
 }

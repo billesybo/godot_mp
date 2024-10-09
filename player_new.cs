@@ -7,6 +7,9 @@ public partial class player_new : CharacterBody2D
 	[Export] 
 	public PackedScene Bullet;
 
+	[Signal]
+	public delegate void GunFiredEventHandler();
+
 	Camera2D _camera;
 
 	public const float Speed = 300.0f;
@@ -29,7 +32,7 @@ public partial class player_new : CharacterBody2D
 
 	private Timer _respawnTimer;
 
-	private CharacterAudio _characterAudio;
+	// private CharacterAudio _characterAudio;
 	
 	public override void _Ready()
 	{
@@ -39,7 +42,7 @@ public partial class player_new : CharacterBody2D
 		_animatedSprite = GetNode<AnimatedSprite2D> ("AnimatedSprite2D");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
 
-		_characterAudio = GetNode<CharacterAudio>("Audio");
+		// _characterAudio = GetNode<CharacterAudio>("CharacterAudio");
 
 		_health = StartHealth;
 		UpdateHealthVisuals();
@@ -141,7 +144,7 @@ public partial class player_new : CharacterBody2D
 		bullet.GlobalPosition = GetNode<Node2D>("GunRotation/BulletSpawn").GlobalPosition;
 		GetTree().Root.AddChild(bullet);
 		
-		_characterAudio.PlayGunSound();
+		EmitSignal(SignalName.GunFired);
 	}
 
 	public void ShowName(string name)
@@ -193,3 +196,4 @@ public partial class player_new : CharacterBody2D
 		UpdateHealthVisuals();
 	}
 }
+

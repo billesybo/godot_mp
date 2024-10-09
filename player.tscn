@@ -320,9 +320,11 @@ texture = ExtResource("6_lay0l")
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 5.0
 
-[node name="Audio" type="Node2D" parent="."]
+[node name="CharacterAudio" type="Node2D" parent="."]
 script = ExtResource("7_lhkq7")
 
-[node name="GunSound" type="AudioStreamPlayer2D" parent="Audio"]
+[node name="GunSound" type="AudioStreamPlayer2D" parent="CharacterAudio"]
 stream = ExtResource("8_hjcei")
 bus = &"Effects"
+
+[connection signal="GunFired" from="." to="CharacterAudio" method="PlayGunSound"]
