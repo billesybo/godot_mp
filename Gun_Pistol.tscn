@@ -1,10 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://47365hdo1xhj"]
+[gd_scene load_steps=5 format=3 uid="uid://47365hdo1xhj"]
 
 [ext_resource type="Script" path="res://SimpleGun.cs" id="1_csipu"]
 [ext_resource type="Texture2D" uid="uid://6nppq28ieut1" path="res://Sprites/Famas.png" id="2_b8q7w"]
+[ext_resource type="PackedScene" uid="uid://cmrr4rbaadtay" path="res://bullet.tscn" id="2_q5l12"]
+[ext_resource type="AudioStream" uid="uid://blvuidskeqw2f" path="res://Audio/Balloon Pop 1.wav" id="4_4fkof"]
 
-[node name="GunPistol" type="Node2D"]
+[node name="GunPistol" type="Node2D" node_paths=PackedStringArray("_fireSound")]
 script = ExtResource("1_csipu")
+Bullet = ExtResource("2_q5l12")
+_fireSound = NodePath("GunSound")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(21, -1)
@@ -13,3 +17,7 @@ texture = ExtResource("2_b8q7w")
 
 [node name="BulletSpawn" type="Node2D" parent="."]
 position = Vector2(34, -3)
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_4fkof")
+bus = &"Effects"

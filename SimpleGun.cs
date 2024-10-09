@@ -6,18 +6,19 @@ public partial class SimpleGun : Node2D
 	[Export] 
 	public PackedScene Bullet;
 
+	[Export]
+	private AudioStreamPlayer2D _fireSound;
+
 	private Node2D _bulletSpawn;
 	
 	public override void _Ready()
 	{
 		_bulletSpawn = GetNode<Node2D>("BulletSpawn");
-		
 	}
 
-	public bool TryFireGun()
+	public void TryFireGun()
 	{
 		Rpc("FireRPC");
-		return true;
 	}
 
 
@@ -30,7 +31,8 @@ public partial class SimpleGun : Node2D
 		bullet.GlobalPosition = _bulletSpawn.GlobalPosition;
 		GetTree().Root.AddChild(bullet);
 		
-		//EmitSignal(SignalName.GunFired); TODO SIGNAAAAL
+		//EmitSignal(SignalName.GunFired);
+		_fireSound.Play();
 	}
 
 }

@@ -91,9 +91,9 @@ public partial class player_new : CharacterBody2D
 		if (Input.IsActionJustPressed("fire"))
 		{
 			//Rpc("FireRPC");
-			bool fired = _gun.TryFireGun(); 
-			if (fired)// MEH smarter stuff here??
-				EmitSignal(SignalName.GunFired);
+			_gun.TryFireGun(); 
+			// if (fired)// MEH smarter stuff here??
+			// 	EmitSignal(SignalName.GunFired);
 		}
 
 		Vector2 direction = Input.GetVector("left", "right", "up", "down");

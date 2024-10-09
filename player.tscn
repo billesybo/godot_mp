@@ -272,7 +272,6 @@ shape = SubResource("RectangleShape2D_jyxoc")
 position = Vector2(0, -17)
 
 [node name="GunPistol" parent="GunRotation" instance=ExtResource("4_togqe")]
-Bullet = ExtResource("2_jndeb")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_interval = 0.1
