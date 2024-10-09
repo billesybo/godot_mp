@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 using MPTest;
 
 public partial class enemy : CharacterBody2D
@@ -16,12 +17,16 @@ public partial class enemy : CharacterBody2D
 	private Timer _talkTimer;
 	private Timer _actionTimer;
 
-	private Vector2 _direction = Vector2.Right;
 	private bool _jumpNextFrame;
 	
 	private AnimatedSprite2D _animatedSprite;
 
 	private bool _isAttacking;
+	
+	// SYNCED
+	private Vector2 _direction = Vector2.Right;
+	private Vector2 _syncPosition;
+
 
 	public override void _Ready()
 	{
@@ -36,10 +41,20 @@ public partial class enemy : CharacterBody2D
 		_actionTimer.Timeout += PickAction;
 		
 		UpdateAnimation();
+		
+		// THIS IS SHIT
+		GameManager.NumEnemies++;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if (!Multiplayer.IsServer())
+		{
+			//GD.Print($"Client pos updating to {_syncPosition}");
+			GlobalPosition = GlobalPosition.Lerp(_syncPosition, 0.1f); 
+			return;
+		}
+
 		Vector2 velocity = Velocity;
 
 		// Add the gravity.
@@ -69,6 +84,10 @@ public partial class enemy : CharacterBody2D
 
 		Velocity = velocity;
 		MoveAndSlide();
+
+		// Set the synced position for teh syncing
+		// GD.Print($"Server pos updating to {_syncPosition}");
+		_syncPosition = GlobalPosition;
 	}
 
 	void UpdateAnimation()
@@ -123,6 +142,9 @@ public partial class enemy : CharacterBody2D
 
 	void Cleanup()
 	{
+		// THIS IS SHIT
+		GameManager.NumEnemies--;
+
 		_talkTimer.Timeout -= HandleSayTimeout;
 	}
 

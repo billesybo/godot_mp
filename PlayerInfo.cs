@@ -1,8 +1,8 @@
-﻿namespace MPTest;
+namespace MPTest;
 
 public class PlayerInfo
 {
-    public string Name;
-    public int Id;
-    public int Score;
+	public string Name;
+	public int Id;
+	public int Score;
 }

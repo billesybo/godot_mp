@@ -49,8 +49,7 @@ public partial class player_new : CharacterBody2D
 			return;
 		
 		// Remote pawn (wow structure this code, asshole!)
-		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() !=
-			Multiplayer.GetUniqueId()) 
+		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) 
 		{
 			GlobalPosition = GlobalPosition.Lerp(_syncPosition, 0.1f); 
 			_gunRotation.RotationDegrees = Mathf.Lerp(_gunRotation.RotationDegrees, _syncRotation, 0.1f);
@@ -127,10 +126,10 @@ public partial class player_new : CharacterBody2D
 
 	bool PrettyMuchZero(float number)
 	{
-		return number < 0.004 && number > -0.004;
+		return number < 0.004 && number > -0.004; // TODO abs + move constant
 	}
 
-	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] // TODO move to gun class
 	void FireRPC()
 	{
 		Node2D bullet = Bullet.Instantiate<Node2D>();

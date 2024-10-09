@@ -7,7 +7,7 @@ namespace MPTest;
 public class TextCollection
 {
     private static List<string> _names = new List<string>()
-        { "Bob", "Fred", "Thyra", "Wet Willie", "Catnip", "Theobald", "Duckmanager", "Craycray", "Mehfest"};
+        { "Bob", "Fred", "Thyra", "Wet Willie", "Catnip", "Theobald", "Duckmanager", "Craycray", "Mehfest", "Dingbat", "Oaf"};
     public static string GetRandomName()
     {
         Random random = new Random();

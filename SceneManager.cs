@@ -16,6 +16,8 @@ public partial class SceneManager : Node2D
 	private Timer _enemySpawnTimer;
 
 	private int _enemySpawnIndex = 0;
+
+	private const int EnemyMax = 5;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -63,6 +65,9 @@ public partial class SceneManager : Node2D
 			int count = Mathf.Min(WaveSize, spawnPoints.Count);
 			for (int i = 0; i < count; i++)
 			{
+				if (GameManager.NumEnemies >= EnemyMax)
+					break;
+
 				_enemySpawnIndex %= spawnPoints.Count;
 				Rpc("SpawnEnemy", ((Node2D)spawnPoints[_enemySpawnIndex]).GlobalPosition);
 				_enemySpawnIndex++;
