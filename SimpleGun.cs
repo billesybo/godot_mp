@@ -9,15 +9,26 @@ public partial class SimpleGun : Node2D
 	[Export]
 	private AudioStreamPlayer2D _fireSound;
 
+	[Export] 
+	private Timer _fireTimer;
+
 	private Node2D _bulletSpawn;
 	
 	public override void _Ready()
 	{
 		_bulletSpawn = GetNode<Node2D>("BulletSpawn");
+		_fireTimer.Stop();
 	}
 
 	public void TryFireGun()
 	{
+		if (_fireTimer.TimeLeft > 0)
+		{
+			//GD.Print($"time left {_fireTimer.TimeLeft}");
+			return;
+		}
+
+		_fireTimer.Start();
 		Rpc("FireRPC");
 	}
 
