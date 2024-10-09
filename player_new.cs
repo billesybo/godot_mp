@@ -28,6 +28,8 @@ public partial class player_new : CharacterBody2D
 	private bool _dead;
 
 	private Timer _respawnTimer;
+
+	private CharacterAudio _characterAudio;
 	
 	public override void _Ready()
 	{
@@ -36,6 +38,8 @@ public partial class player_new : CharacterBody2D
 		_camera = GetNode<Camera2D>("Camera2D");
 		_animatedSprite = GetNode<AnimatedSprite2D> ("AnimatedSprite2D");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
+
+		_characterAudio = GetNode<CharacterAudio>("Audio");
 
 		_health = StartHealth;
 		UpdateHealthVisuals();
@@ -136,6 +140,8 @@ public partial class player_new : CharacterBody2D
 		bullet.RotationDegrees = _gunRotation.RotationDegrees;
 		bullet.GlobalPosition = GetNode<Node2D>("GunRotation/BulletSpawn").GlobalPosition;
 		GetTree().Root.AddChild(bullet);
+		
+		_characterAudio.PlayGunSound();
 	}
 
 	public void ShowName(string name)
@@ -155,6 +161,8 @@ public partial class player_new : CharacterBody2D
 		if (_health <= 0)
 		{
 			_dead = true;
+			
+			GD.Print("DED!");
 			_animatedSprite.Play("death");
 			_respawnTimer.Start();
 			_respawnTimer.Timeout += Respawn;

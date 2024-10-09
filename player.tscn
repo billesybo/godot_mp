@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://d3me6dahwxn0q"]
+[gd_scene load_steps=41 format=3 uid="uid://d3me6dahwxn0q"]
 
 [ext_resource type="Script" path="res://player_new.cs" id="1_ro20t"]
 [ext_resource type="PackedScene" uid="uid://cmrr4rbaadtay" path="res://bullet.tscn" id="2_jndeb"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://6nppq28ieut1" path="res://Sprites/Famas.png" id="3_fqy1x"]
 [ext_resource type="FontFile" uid="uid://b6nnr8e7tj86m" path="res://Fonts/good times rg.otf" id="5_4xvqg"]
 [ext_resource type="Texture2D" uid="uid://03xqlt5sdymx" path="res://Sprites/greencircle.png" id="6_lay0l"]
+[ext_resource type="Script" path="res://CharacterAudio.cs" id="7_lhkq7"]
+[ext_resource type="AudioStream" uid="uid://blvuidskeqw2f" path="res://Audio/Balloon Pop 1.wav" id="8_hjcei"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hsg38"]
 atlas = ExtResource("2_pliky")
@@ -317,3 +319,9 @@ texture = ExtResource("6_lay0l")
 
 [node name="RespawnTimer" type="Timer" parent="."]
 wait_time = 5.0
+
+[node name="Audio" type="Node2D" parent="."]
+script = ExtResource("7_lhkq7")
+
+[node name="GunSound" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("8_hjcei")
