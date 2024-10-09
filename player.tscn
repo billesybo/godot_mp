@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://player_new.cs" id="1_ro20t"]
 [ext_resource type="PackedScene" uid="uid://cmrr4rbaadtay" path="res://bullet.tscn" id="2_jndeb"]
 [ext_resource type="Texture2D" uid="uid://x7pdbymfjtph" path="res://Sprites/Spritesheets/Main Character - Male - Full spritesheet - No Guide.png" id="2_pliky"]
-[ext_resource type="Texture2D" uid="uid://6nppq28ieut1" path="res://Sprites/Famas.png" id="3_fqy1x"]
+[ext_resource type="PackedScene" uid="uid://47365hdo1xhj" path="res://Gun_Pistol.tscn" id="4_togqe"]
 [ext_resource type="FontFile" uid="uid://b6nnr8e7tj86m" path="res://Fonts/good times rg.otf" id="5_4xvqg"]
 [ext_resource type="Texture2D" uid="uid://03xqlt5sdymx" path="res://Sprites/greencircle.png" id="6_lay0l"]
 [ext_resource type="Script" path="res://CharacterAudio.cs" id="7_lhkq7"]
@@ -271,13 +271,8 @@ shape = SubResource("RectangleShape2D_jyxoc")
 [node name="GunRotation" type="Node2D" parent="."]
 position = Vector2(0, -17)
 
-[node name="Sprite2D" type="Sprite2D" parent="GunRotation"]
-position = Vector2(21, -1)
-scale = Vector2(0.25, 0.583333)
-texture = ExtResource("3_fqy1x")
-
-[node name="BulletSpawn" type="Node2D" parent="GunRotation"]
-position = Vector2(34, -3)
+[node name="GunPistol" parent="GunRotation" instance=ExtResource("4_togqe")]
+Bullet = ExtResource("2_jndeb")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_interval = 0.1

@@ -32,6 +32,8 @@ public partial class player_new : CharacterBody2D
 
 	private Timer _respawnTimer;
 
+	private SimpleGun _gun; // TODO instantiate these
+
 	// private CharacterAudio _characterAudio;
 	
 	public override void _Ready()
@@ -46,6 +48,8 @@ public partial class player_new : CharacterBody2D
 
 		_health = StartHealth;
 		UpdateHealthVisuals();
+
+		_gun = GetNode<SimpleGun>("GunRotation/GunPistol");
 
 		Input.MouseMode = Input.MouseModeEnum.Confined;
 	}
@@ -86,7 +90,10 @@ public partial class player_new : CharacterBody2D
 		
 		if (Input.IsActionJustPressed("fire"))
 		{
-			Rpc("FireRPC");
+			//Rpc("FireRPC");
+			bool fired = _gun.TryFireGun(); 
+			if (fired)// MEH smarter stuff here??
+				EmitSignal(SignalName.GunFired);
 		}
 
 		Vector2 direction = Input.GetVector("left", "right", "up", "down");
@@ -136,16 +143,16 @@ public partial class player_new : CharacterBody2D
 		return number < 0.004 && number > -0.004; // TODO abs + move constant
 	}
 
-	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] // TODO move to gun class
-	void FireRPC()
-	{
-		Node2D bullet = Bullet.Instantiate<Node2D>();
-		bullet.RotationDegrees = _gunRotation.RotationDegrees;
-		bullet.GlobalPosition = GetNode<Node2D>("GunRotation/BulletSpawn").GlobalPosition;
-		GetTree().Root.AddChild(bullet);
-		
-		EmitSignal(SignalName.GunFired);
-	}
+	// [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] // TODO move to gun class
+	// void FireRPC(float rotationDegrees)
+	// {
+	// 	Node2D bullet = Bullet.Instantiate<Node2D>();
+	// 	bullet.RotationDegrees = rotationDegrees; //_gunRotation.RotationDegrees;
+	// 	bullet.GlobalPosition = GetNode<Node2D>("GunRotation/BulletSpawn").GlobalPosition;
+	// 	GetTree().Root.AddChild(bullet);
+	// 	
+	// 	EmitSignal(SignalName.GunFired);
+	// }
 
 	public void ShowName(string name)
 	{
