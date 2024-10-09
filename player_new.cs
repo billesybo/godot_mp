@@ -10,6 +10,9 @@ public partial class player_new : CharacterBody2D
 	[Signal]
 	public delegate void GunFiredEventHandler();
 
+	[Signal]
+	public delegate void GunSwitchedEventHandler();
+
 	Camera2D _camera;
 
 	public const float Speed = 300.0f;
@@ -34,11 +37,25 @@ public partial class player_new : CharacterBody2D
 
 	private SimpleGun _gun; // TODO instantiate these
 
+	private MultiplayerSynchronizer _multiplayerSynchronizer;
+
+	public MultiplayerSynchronizer MultiplayerSynchronizer => _multiplayerSynchronizer;
+
+	public bool IsLocalOwned
+	{
+		get
+		{
+			return _multiplayerSynchronizer.GetMultiplayerAuthority() == Multiplayer.GetUniqueId();
+		}
+	}
+
 	// private CharacterAudio _characterAudio;
 	
 	public override void _Ready()
 	{
-		GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").SetMultiplayerAuthority(int.Parse(Name)); // TODO CACHE
+		_multiplayerSynchronizer = GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer"); 
+		_multiplayerSynchronizer.SetMultiplayerAuthority(int.Parse(Name));
+		
 		_gunRotation = GetNode<Node2D>("GunRotation");
 		_camera = GetNode<Camera2D>("Camera2D");
 		_animatedSprite = GetNode<AnimatedSprite2D> ("AnimatedSprite2D");
@@ -60,7 +77,7 @@ public partial class player_new : CharacterBody2D
 			return;
 		
 		// Remote pawn (wow structure this code, asshole!)
-		if (GetNode<MultiplayerSynchronizer>("MultiplayerSynchronizer").GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) 
+		if (_multiplayerSynchronizer.GetMultiplayerAuthority() != Multiplayer.GetUniqueId()) 
 		{
 			GlobalPosition = GlobalPosition.Lerp(_syncPosition, 0.1f); 
 			_gunRotation.RotationDegrees = Mathf.Lerp(_gunRotation.RotationDegrees, _syncRotation, 0.1f);
@@ -94,6 +111,11 @@ public partial class player_new : CharacterBody2D
 			_gun.TryFireGun(); 
 			// if (fired)// MEH smarter stuff here??
 			// 	EmitSignal(SignalName.GunFired);
+		}
+
+		if (Input.IsActionJustPressed("reload"))
+		{
+			_gun.TryReload();
 		}
 
 		Vector2 direction = Input.GetVector("left", "right", "up", "down");

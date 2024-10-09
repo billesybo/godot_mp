@@ -9,6 +9,9 @@ public partial class SceneManager : Node2D
 	[Export] private PackedScene _playerScene;
 
 	[Export] private PackedScene _enemyScene;
+	
+	[Signal]
+	public delegate void SceneManagerInitializedEventHandler();
 
 	private const int WaveSize = 2;
 	private const float WaveIntervalMin = 3f;
@@ -29,6 +32,7 @@ public partial class SceneManager : Node2D
 			spawnedPlayer.Name = playerInfo.Id.ToString();
 			AddChild(spawnedPlayer);
 			spawnedPlayer.ShowName(playerInfo.Name);
+			playerInfo.PlayerPawn = spawnedPlayer;
 			
 			foreach (Node2D spawnPoint in GetTree().GetNodesInGroup("SpawnPoints"))
 			{
@@ -40,6 +44,8 @@ public partial class SceneManager : Node2D
 
 			index++;
 		}
+
+		EmitSignal(SignalName.SceneManagerInitialized);
 		
 		InitEnemySpawn();
 	}

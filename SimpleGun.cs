@@ -1,5 +1,5 @@
+using System.Reflection.Metadata;
 using Godot;
-using System;
 
 public partial class SimpleGun : Node2D
 {
@@ -12,16 +12,44 @@ public partial class SimpleGun : Node2D
 	[Export] 
 	private Timer _fireTimer;
 
+	[Export] 
+	private Timer _reloadTimer;
+
+	public int MaxAmmo = 6;
+
+	public int CurrentAmmo { get; private set; }
+
+
 	private Node2D _bulletSpawn;
 	
 	public override void _Ready()
 	{
 		_bulletSpawn = GetNode<Node2D>("BulletSpawn");
 		_fireTimer.Stop();
+		_reloadTimer.Timeout += HandleReload;
+
+		HandleReload();
+	}
+
+	private void HandleReload()
+	{
+		CurrentAmmo = MaxAmmo;
+		_reloadTimer.Stop();
 	}
 
 	public void TryFireGun()
 	{
+		if (CurrentAmmo <= 0)
+		{
+			return;
+			// TODO CLICK SOUND 
+		}
+
+		if (_reloadTimer.TimeLeft > 0) // no shooting while reloading!
+		{
+			return;
+		}
+
 		if (_fireTimer.TimeLeft > 0)
 		{
 			//GD.Print($"time left {_fireTimer.TimeLeft}");
@@ -29,7 +57,13 @@ public partial class SimpleGun : Node2D
 		}
 
 		_fireTimer.Start();
+		CurrentAmmo--;
 		Rpc("FireRPC");
+	}
+
+	public void TryReload()
+	{
+		Rpc("ReloadRPC");
 	}
 
 
@@ -45,5 +79,12 @@ public partial class SimpleGun : Node2D
 		//EmitSignal(SignalName.GunFired);
 		_fireSound.Play();
 	}
+
+	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
+	void ReloadRPC()
+	{
+		_reloadTimer.Start();
+	}
+
 
 }

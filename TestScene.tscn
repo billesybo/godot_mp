@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bo5jvxf56mmoj"]
+[gd_scene load_steps=28 format=3 uid="uid://bo5jvxf56mmoj"]
 
 [ext_resource type="Script" path="res://SceneManager.cs" id="1_arae6"]
 [ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="1_t18u7"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://6mlq2vdr7bpy" path="res://Sprites/buildings/building_04.png" id="11_dcj7v"]
 [ext_resource type="Texture2D" uid="uid://dyktfjts1ieln" path="res://Sprites/buildings/building_05.png" id="12_dw0uc"]
 [ext_resource type="PackedScene" uid="uid://ci8ts2iosi271" path="res://enemy.tscn" id="15_8qhhw"]
+[ext_resource type="Script" path="res://InGameUI.cs" id="16_ha8sr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
 texture = ExtResource("1_t18u7")
@@ -630,3 +631,12 @@ shape = SubResource("SegmentShape2D_7kg5j")
 one_way_collision = true
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
+
+[node name="InGameUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_testLabel")]
+script = ExtResource("16_ha8sr")
+_testLabel = NodePath("Label")
+
+[node name="Label" type="Label" parent="InGameUI"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "MOO"
