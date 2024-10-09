@@ -325,3 +325,4 @@ script = ExtResource("7_lhkq7")
 
 [node name="GunSound" type="AudioStreamPlayer2D" parent="Audio"]
 stream = ExtResource("8_hjcei")
+bus = &"Effects"
