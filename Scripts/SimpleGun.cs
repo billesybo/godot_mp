@@ -27,6 +27,7 @@ public partial class SimpleGun : Node2D
 
 
 	private Node2D _bulletSpawn;
+	private Sprite2D _gunSprite;
 	
 	public override void _Ready()
 	{
@@ -34,7 +35,19 @@ public partial class SimpleGun : Node2D
 		_fireTimer.Stop();
 		_reloadTimer.Timeout += HandleReload;
 
+		_gunSprite = GetNode<Sprite2D>("Sprite2D");
+
 		HandleReload();
+	}
+
+	public override void _PhysicsProcess(double delta)
+	{
+		//GD.Print($"GlobalRotation {GlobalRotation}");
+
+		double absRotation = Mathf.Abs(GlobalRotation);
+		bool flipped = absRotation > Mathf.Pi / 2;
+
+		_gunSprite.FlipV = flipped;
 	}
 
 	private void HandleReload()
@@ -75,7 +88,6 @@ public partial class SimpleGun : Node2D
 
 	public void TryReload()
 	{
-		GD.Print($"MEH reload ze gun");
 		Rpc("ReloadRPC");
 	}
 
@@ -83,7 +95,7 @@ public partial class SimpleGun : Node2D
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] 
 	void FireRPC()
 	{
-		GD.Print($"MEH shoot ze gun");
+		GD.Print($"MEH shoot ze gun. Server {Multiplayer.IsServer()}");
 		
 		Node2D bullet = Bullet.Instantiate<Node2D>();
 		bullet.RotationDegrees = _bulletSpawn.GlobalRotationDegrees; // RotationDegrees; //_rotationDegrees;
@@ -98,7 +110,7 @@ public partial class SimpleGun : Node2D
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
 	void ReloadRPC()
 	{
-		GD.Print($"MEH shoot ze gun");
+		GD.Print($"MEH reload ze gun. Server {Multiplayer.IsServer()}");
 		_reloadTimer.Start();
 	}
 

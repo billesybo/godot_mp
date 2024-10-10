@@ -44,6 +44,8 @@ public partial class player_new : CharacterBody2D
 
 	public MultiplayerSynchronizer MultiplayerSynchronizer => _multiplayerSynchronizer;
 
+	private int _lastUpdatedHealth;
+
 	public bool IsLocalOwned
 	{
 		get
@@ -142,6 +144,11 @@ public partial class player_new : CharacterBody2D
 		_camera.Enabled = true;
 		
 		UpdateAnimations(direction, Velocity);
+
+		if (_lastUpdatedHealth != _health)
+		{
+			UpdateHealthVisuals();
+		}
 	}
 
 	void UpdateAnimations(Vector2 direction, Vector2 velocity)
@@ -240,6 +247,7 @@ public partial class player_new : CharacterBody2D
 
 	void UpdateHealthVisuals()
 	{
+		_lastUpdatedHealth = _health;
 		var node = GetNode<Node2D>("HealthIndicator");
 		int count = node.GetChildCount();
 		for (int i = 0; i < count; i++)
