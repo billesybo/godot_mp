@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dt78hjjusjuen"]
+[gd_scene load_steps=4 format=3 uid="uid://dt78hjjusjuen"]
 
 [ext_resource type="Script" path="res://Scripts/MultiplayerController.cs" id="1_statf"]
 [ext_resource type="Texture2D" uid="uid://c4nafucp8rd68" path="res://Sprites/background/parallax_background_layer_6.png" id="2_e6bbv"]
+[ext_resource type="FontFile" uid="uid://b84wxny4qna3k" path="res://Fonts/Getafe-Demo.ttf" id="3_h2rdw"]
 
 [node name="Multiplayer Controller" type="Control"]
 layout_mode = 3
@@ -17,62 +18,74 @@ position = Vector2(552.5, 320.25)
 scale = Vector2(2.71289, 2.73438)
 texture = ExtResource("2_e6bbv")
 
+[node name="Label2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 723.0
+offset_top = 17.0
+offset_right = 1075.0
+offset_bottom = 89.0
+theme_override_fonts/font = ExtResource("3_h2rdw")
+theme_override_font_sizes/font_size = 53
+text = "PHAILGAME 2000!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Button_Host" type="Button" parent="."]
 layout_mode = 0
-offset_left = 71.0
-offset_top = 61.0
-offset_right = 163.0
-offset_bottom = 92.0
+offset_left = 82.0
+offset_top = 141.0
+offset_right = 174.0
+offset_bottom = 172.0
 text = "Host
 "
 
 [node name="Button_Join" type="Button" parent="."]
 layout_mode = 0
-offset_left = 435.0
-offset_top = 134.0
-offset_right = 527.0
-offset_bottom = 165.0
+offset_left = 446.0
+offset_top = 214.0
+offset_right = 538.0
+offset_bottom = 245.0
 text = "Join"
 
 [node name="Button_Start" type="Button" parent="."]
 layout_mode = 0
-offset_left = 238.0
-offset_top = 59.0
-offset_right = 330.0
-offset_bottom = 90.0
+offset_left = 249.0
+offset_top = 139.0
+offset_right = 341.0
+offset_bottom = 170.0
 text = "Start"
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 59.0
-offset_top = 3.0
-offset_right = 398.0
-offset_bottom = 34.0
+offset_left = 70.0
+offset_top = 83.0
+offset_right = 409.0
+offset_bottom = 114.0
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 0
-offset_left = 3.0
-offset_top = 7.0
-offset_right = 50.0
-offset_bottom = 30.0
+offset_left = 14.0
+offset_top = 87.0
+offset_right = 61.0
+offset_bottom = 110.0
 text = "Name
 "
 
 [node name="Label_ip" type="Label" parent="."]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 135.0
-offset_right = 56.0
-offset_bottom = 158.0
+offset_left = 20.0
+offset_top = 215.0
+offset_right = 67.0
+offset_bottom = 238.0
 text = "IP:
 "
 
 [node name="LineEdit_ip" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 66.0
-offset_top = 132.0
-offset_right = 405.0
-offset_bottom = 163.0
+offset_left = 77.0
+offset_top = 212.0
+offset_right = 416.0
+offset_bottom = 243.0
 
 [node name="Label_log" type="Label" parent="."]
 layout_mode = 0
