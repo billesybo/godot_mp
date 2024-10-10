@@ -11,7 +11,7 @@ Bullet = ExtResource("2_fep7t")
 _fireSound = NodePath("GunSound")
 _fireTimer = NodePath("FireTimer")
 _reloadTimer = NodePath("ReloadTimer")
-_maxAmmo = 20
+_maxAmmo = 26
 _autoFire = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

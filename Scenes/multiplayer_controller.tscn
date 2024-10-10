@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dt78hjjusjuen"]
+[gd_scene load_steps=3 format=3 uid="uid://dt78hjjusjuen"]
 
 [ext_resource type="Script" path="res://Scripts/MultiplayerController.cs" id="1_statf"]
+[ext_resource type="Texture2D" uid="uid://c4nafucp8rd68" path="res://Sprites/background/parallax_background_layer_6.png" id="2_e6bbv"]
 
 [node name="Multiplayer Controller" type="Control"]
 layout_mode = 3
@@ -10,6 +11,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_statf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(552.5, 320.25)
+scale = Vector2(2.71289, 2.73438)
+texture = ExtResource("2_e6bbv")
 
 [node name="Button_Host" type="Button" parent="."]
 layout_mode = 0
@@ -72,8 +78,8 @@ offset_bottom = 163.0
 layout_mode = 0
 offset_left = 21.0
 offset_top = 324.0
-offset_right = 71.0
-offset_bottom = 399.0
+offset_right = 224.0
+offset_bottom = 510.0
 text = "Blah
 Blah
 Blah"
