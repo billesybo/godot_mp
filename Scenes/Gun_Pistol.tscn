@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://47365hdo1xhj"]
+[gd_scene load_steps=6 format=3 uid="uid://47365hdo1xhj"]
 
 [ext_resource type="Script" path="res://Scripts/SimpleGun.cs" id="1_1lv51"]
 [ext_resource type="PackedScene" uid="uid://cmrr4rbaadtay" path="res://Scenes/bullet.tscn" id="2_wg0dt"]
 [ext_resource type="Texture2D" uid="uid://bas2e16r3yrr4" path="res://Sprites/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png" id="3_0yofh"]
 [ext_resource type="AudioStream" uid="uid://blvuidskeqw2f" path="res://Audio/Balloon Pop 1.wav" id="4_cfdkj"]
+[ext_resource type="AudioStream" uid="uid://bn1ap0t83uqdk" path="res://Audio/Mosin Bolt Cycle MP3.mp3" id="5_nqnrb"]
 
-[node name="Gun" type="Node2D" node_paths=PackedStringArray("_fireSound", "_fireTimer", "_reloadTimer")]
+[node name="Gun" type="Node2D" node_paths=PackedStringArray("_fireSound", "_reloadSound", "_fireTimer", "_reloadTimer")]
 script = ExtResource("1_1lv51")
 Bullet = ExtResource("2_wg0dt")
 _fireSound = NodePath("GunSound")
+_reloadSound = NodePath("ReloadSound")
 _fireTimer = NodePath("FireTimer")
 _reloadTimer = NodePath("ReloadTimer")
 _maxAmmo = 6
@@ -23,6 +25,10 @@ position = Vector2(34, -3)
 
 [node name="GunSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_cfdkj")
+bus = &"Effects"
+
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_nqnrb")
 bus = &"Effects"
 
 [node name="FireTimer" type="Timer" parent="."]

@@ -9,6 +9,9 @@ public partial class SimpleGun : Node2D
 	[Export]
 	private AudioStreamPlayer2D _fireSound;
 
+	[Export]
+	private AudioStreamPlayer2D _reloadSound;
+
 	[Export] 
 	private Timer _fireTimer;
 
@@ -89,6 +92,7 @@ public partial class SimpleGun : Node2D
 	public void TryReload()
 	{
 		Rpc("ReloadRPC");
+		_reloadSound.Play();
 	}
 
 

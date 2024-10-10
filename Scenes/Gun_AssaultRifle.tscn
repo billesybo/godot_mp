@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://0sxc1083ldmr"]
+[gd_scene load_steps=6 format=3 uid="uid://0sxc1083ldmr"]
 
 [ext_resource type="Script" path="res://Scripts/SimpleGun.cs" id="1_681ww"]
 [ext_resource type="PackedScene" uid="uid://cmrr4rbaadtay" path="res://Scenes/bullet.tscn" id="2_fep7t"]
 [ext_resource type="Texture2D" uid="uid://cmbut50jom6we" path="res://Sprites/GUNS_V1.00/V1.00/PNG/Assault_rifle_V1.01.png" id="3_ubddl"]
 [ext_resource type="AudioStream" uid="uid://blvuidskeqw2f" path="res://Audio/Balloon Pop 1.wav" id="4_ncfdl"]
+[ext_resource type="AudioStream" uid="uid://cegru47n7f17j" path="res://Audio/Angel Mag Reload Full MP3.mp3" id="5_fqejf"]
 
-[node name="Gun" type="Node2D" node_paths=PackedStringArray("_fireSound", "_fireTimer", "_reloadTimer")]
+[node name="Gun" type="Node2D" node_paths=PackedStringArray("_fireSound", "_reloadSound", "_fireTimer", "_reloadTimer")]
 script = ExtResource("1_681ww")
 Bullet = ExtResource("2_fep7t")
 _fireSound = NodePath("GunSound")
+_reloadSound = NodePath("ReloadSound")
 _fireTimer = NodePath("FireTimer")
 _reloadTimer = NodePath("ReloadTimer")
 _maxAmmo = 26
@@ -31,4 +33,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 4.0
+wait_time = 3.0
+
+[node name="ReloadSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fqejf")
