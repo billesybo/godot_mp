@@ -169,7 +169,7 @@ public partial class player_new : CharacterBody2D
 		return number < 0.004 && number > -0.004; // TODO abs + move constant
 	}
 
-	void SwitchGun(GunKind kind)
+	public void SwitchGun(GunKind kind)
 	{
 		DespawnGun();
 

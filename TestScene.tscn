@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bo5jvxf56mmoj"]
+[gd_scene load_steps=29 format=3 uid="uid://bo5jvxf56mmoj"]
 
 [ext_resource type="Script" path="res://SceneManager.cs" id="1_arae6"]
 [ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="1_t18u7"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dyktfjts1ieln" path="res://Sprites/buildings/building_05.png" id="12_dw0uc"]
 [ext_resource type="PackedScene" uid="uid://ci8ts2iosi271" path="res://enemy.tscn" id="15_8qhhw"]
 [ext_resource type="Script" path="res://InGameUI.cs" id="16_ha8sr"]
+[ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://pickup.tscn" id="17_y7bfp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
 texture = ExtResource("1_t18u7")
@@ -640,3 +641,6 @@ _testLabel = NodePath("Label")
 offset_right = 40.0
 offset_bottom = 23.0
 text = "MOO"
+
+[node name="Pickup" parent="." instance=ExtResource("17_y7bfp")]
+position = Vector2(460, 431)
