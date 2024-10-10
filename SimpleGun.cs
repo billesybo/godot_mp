@@ -14,8 +14,11 @@ public partial class SimpleGun : Node2D
 
 	[Export] 
 	private Timer _reloadTimer;
-
-	public int MaxAmmo = 6;
+	
+	[Export]
+	private int _maxAmmo = 5;
+	
+	public int MaxAmmo => _maxAmmo;
 
 	public int CurrentAmmo { get; private set; }
 
@@ -87,4 +90,11 @@ public partial class SimpleGun : Node2D
 	}
 
 
+}
+
+public enum GunKind
+{
+	None = 0,
+	Pistol = 1,
+	AssaultRifle = 2,
 }

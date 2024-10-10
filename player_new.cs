@@ -7,6 +7,9 @@ public partial class player_new : CharacterBody2D
 	[Export] 
 	public PackedScene Bullet;
 
+	[Export] public PackedScene Pistol;
+	[Export] public PackedScene AssaultRifle;
+
 	[Signal]
 	public delegate void GunFiredEventHandler();
 
@@ -66,7 +69,8 @@ public partial class player_new : CharacterBody2D
 		_health = StartHealth;
 		UpdateHealthVisuals();
 
-		_gun = GetNode<SimpleGun>("GunRotation/GunPistol");
+		//_gun = GetNode<SimpleGun>("GunRotation/GunPistol");
+		SwitchGun(GunKind.Pistol);
 
 		Input.MouseMode = Input.MouseModeEnum.Confined;
 	}
@@ -163,6 +167,38 @@ public partial class player_new : CharacterBody2D
 	bool PrettyMuchZero(float number)
 	{
 		return number < 0.004 && number > -0.004; // TODO abs + move constant
+	}
+
+	void SwitchGun(GunKind kind)
+	{
+		DespawnGun();
+
+		PackedScene newGun = null;
+		switch (kind)
+		{
+			case GunKind.Pistol:
+				newGun = Pistol;
+				break;
+			case GunKind.AssaultRifle:
+				newGun = AssaultRifle;
+				break;
+		}
+
+		if (newGun != null)
+		{
+			_gun = newGun.Instantiate<SimpleGun>();
+			_gunRotation.AddChild(_gun);
+			EmitSignal(SignalName.GunSwitched);
+		}
+	}
+
+	void DespawnGun()
+	{
+		if (_gun != null)
+		{
+			_gun.QueueFree();
+			_gun = null;
+		}
 	}
 
 	// [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] // TODO move to gun class
