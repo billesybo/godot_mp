@@ -111,10 +111,11 @@ public partial class player_new : CharacterBody2D
 		
 		if (Input.IsActionJustPressed("fire"))
 		{
-			//Rpc("FireRPC");
 			_gun.TryFireGun(); 
-			// if (fired)// MEH smarter stuff here??
-			// 	EmitSignal(SignalName.GunFired);
+		}
+		else if (Input.IsActionPressed("fire")) // supppRREESSSING FIREEEEE!
+		{
+			_gun.TryAutoFire();
 		}
 
 		if (Input.IsActionJustPressed("reload"))

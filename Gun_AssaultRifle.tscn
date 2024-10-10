@@ -12,6 +12,7 @@ _fireSound = NodePath("GunSound")
 _fireTimer = NodePath("FireTimer")
 _reloadTimer = NodePath("ReloadTimer")
 _maxAmmo = 20
+_autoFire = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(43, 0)

@@ -17,6 +17,9 @@ public partial class SimpleGun : Node2D
 	
 	[Export]
 	private int _maxAmmo = 5;
+
+	[Export] 
+	private bool _autoFire;
 	
 	public int MaxAmmo => _maxAmmo;
 
@@ -62,6 +65,12 @@ public partial class SimpleGun : Node2D
 		_fireTimer.Start();
 		CurrentAmmo--;
 		Rpc("FireRPC");
+	}
+
+	public void TryAutoFire()
+	{
+		if(_autoFire)
+			TryFireGun();
 	}
 
 	public void TryReload()
