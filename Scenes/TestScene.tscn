@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bo5jvxf56mmoj"]
+[gd_scene load_steps=23 format=3 uid="uid://bo5jvxf56mmoj"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_vakky"]
 [ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://Scenes/player.tscn" id="2_mfanj"]
@@ -9,13 +9,13 @@
 [ext_resource type="Texture2D" uid="uid://dyom6d7dd6st5" path="res://Sprites/background/parallax_background_layer_3.png" id="7_povdv"]
 [ext_resource type="Texture2D" uid="uid://bqw3kkw71ojfx" path="res://Sprites/background/parallax_background_layer_4.png" id="8_tr77s"]
 [ext_resource type="Texture2D" uid="uid://c7fblx01buq5g" path="res://Sprites/background/parallax_background_layer_5.png" id="9_rbxld"]
-[ext_resource type="Texture2D" uid="uid://rd1o4bwt8wqw" path="res://Sprites/buildings/building_02.png" id="11_ynt5r"]
 [ext_resource type="Texture2D" uid="uid://ljy6ysmba06s" path="res://Sprites/buildings/building_03.png" id="12_eq2e1"]
-[ext_resource type="Texture2D" uid="uid://6mlq2vdr7bpy" path="res://Sprites/buildings/building_04.png" id="13_y7lv8"]
-[ext_resource type="Texture2D" uid="uid://dyktfjts1ieln" path="res://Sprites/buildings/building_05.png" id="14_q1gyn"]
 [ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="15_7f1t3"]
 [ext_resource type="Script" path="res://Scripts/InGameUI.cs" id="16_g445g"]
 [ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://Scenes/pickup.tscn" id="17_0m028"]
+[ext_resource type="PackedScene" uid="uid://b7h2p0koc4igk" path="res://Scenes/Houses/house_05_01.tscn" id="17_8kp87"]
+[ext_resource type="PackedScene" uid="uid://bdt0qs3nqiptb" path="res://Scenes/Houses/house_04_01.tscn" id="17_l7hdf"]
+[ext_resource type="PackedScene" uid="uid://cf1aygxyoxmw4" path="res://Scenes/Houses/house_02_01.tscn" id="17_vv135"]
 [ext_resource type="PackedScene" uid="uid://bl6n4xswgonjn" path="res://Scenes/Houses/house_01_01.tscn" id="18_sdvy4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
@@ -350,24 +350,6 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_irm0j"]
 normal = Vector2(-1, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fc1gx"]
-size = Vector2(312, 16)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_b6kbf"]
-a = Vector2(-126.33, 0)
-b = Vector2(121, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_mww10"]
-a = Vector2(45, 0)
-b = Vector2(-129, 1)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_yb1p0"]
-a = Vector2(180, 0)
-b = Vector2(-131, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_b013j"]
-b = Vector2(-228, -1)
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_vakky")
 _playerScene = ExtResource("2_mfanj")
@@ -426,25 +408,10 @@ texture = ExtResource("9_rbxld")
 
 [node name="Visuals_buildings" type="Node2D" parent="."]
 
-[node name="Sprite2D2" type="Sprite2D" parent="Visuals_buildings"]
-position = Vector2(1151, 160)
-scale = Vector2(2.12109, 3.82153)
-texture = ExtResource("11_ynt5r")
-
 [node name="Sprite2D3" type="Sprite2D" parent="Visuals_buildings"]
 position = Vector2(1580, 128)
 scale = Vector2(2.12109, 3.82153)
 texture = ExtResource("12_eq2e1")
-
-[node name="Sprite2D4" type="Sprite2D" parent="Visuals_buildings"]
-position = Vector2(744, 204)
-scale = Vector2(2.66992, 2.84826)
-texture = ExtResource("13_y7lv8")
-
-[node name="Sprite2D5" type="Sprite2D" parent="Visuals_buildings"]
-position = Vector2(256, 151)
-scale = Vector2(1.96777, 2.52681)
-texture = ExtResource("14_q1gyn")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(6, 78)
@@ -503,102 +470,6 @@ shape = SubResource("WorldBoundaryShape2D_irm0j")
 
 [node name="Buildings" type="Node2D" parent="Collisions"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Collisions/Buildings"]
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D"]
-position = Vector2(737, 334)
-shape = SubResource("RectangleShape2D_fc1gx")
-one_way_collision = true
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(1160, 296)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D2"]
-shape = SubResource("SegmentShape2D_b6kbf")
-one_way_collision = true
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(1162, 172)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D3"]
-shape = SubResource("SegmentShape2D_mww10")
-one_way_collision = true
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(1161, 49)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D4"]
-shape = SubResource("SegmentShape2D_mww10")
-one_way_collision = true
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(1161, -91)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D5"]
-shape = SubResource("SegmentShape2D_mww10")
-one_way_collision = true
-
-[node name="StaticBody2D6" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(712, 236)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D6"]
-shape = SubResource("SegmentShape2D_yb1p0")
-one_way_collision = true
-
-[node name="StaticBody2D7" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(712, 132)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D7"]
-shape = SubResource("SegmentShape2D_yb1p0")
-one_way_collision = true
-
-[node name="StaticBody2D8" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(365, 342)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D8"]
-shape = SubResource("SegmentShape2D_b013j")
-one_way_collision = true
-
-[node name="StaticBody2D9" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(365, 261)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D9"]
-shape = SubResource("SegmentShape2D_b013j")
-one_way_collision = true
-
-[node name="StaticBody2D10" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(365, 165)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D10"]
-shape = SubResource("SegmentShape2D_b013j")
-one_way_collision = true
-
-[node name="StaticBody2D11" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(365, 85)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D11"]
-shape = SubResource("SegmentShape2D_b013j")
-one_way_collision = true
-
-[node name="StaticBody2D12" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(365, -11)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D12"]
-shape = SubResource("SegmentShape2D_b013j")
-one_way_collision = true
-
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 
 [node name="InGameUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_testLabel")]
@@ -615,3 +486,12 @@ position = Vector2(460, 431)
 
 [node name="House_01_01" parent="." instance=ExtResource("18_sdvy4")]
 position = Vector2(-87, 434)
+
+[node name="House_02_01" parent="." instance=ExtResource("17_vv135")]
+position = Vector2(1142, 452)
+
+[node name="House_04_01" parent="." instance=ExtResource("17_l7hdf")]
+position = Vector2(735, 429)
+
+[node name="Hosue_05_01" parent="." instance=ExtResource("17_8kp87")]
+position = Vector2(280, 434)
