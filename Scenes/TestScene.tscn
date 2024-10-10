@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://bo5jvxf56mmoj"]
+[gd_scene load_steps=28 format=3 uid="uid://bo5jvxf56mmoj"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_vakky"]
 [ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://Scenes/player.tscn" id="2_mfanj"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dyom6d7dd6st5" path="res://Sprites/background/parallax_background_layer_3.png" id="7_povdv"]
 [ext_resource type="Texture2D" uid="uid://bqw3kkw71ojfx" path="res://Sprites/background/parallax_background_layer_4.png" id="8_tr77s"]
 [ext_resource type="Texture2D" uid="uid://c7fblx01buq5g" path="res://Sprites/background/parallax_background_layer_5.png" id="9_rbxld"]
-[ext_resource type="Texture2D" uid="uid://ccfmiv4nqbvf" path="res://Sprites/buildings/building_01.png" id="10_fquy8"]
 [ext_resource type="Texture2D" uid="uid://rd1o4bwt8wqw" path="res://Sprites/buildings/building_02.png" id="11_ynt5r"]
 [ext_resource type="Texture2D" uid="uid://ljy6ysmba06s" path="res://Sprites/buildings/building_03.png" id="12_eq2e1"]
 [ext_resource type="Texture2D" uid="uid://6mlq2vdr7bpy" path="res://Sprites/buildings/building_04.png" id="13_y7lv8"]
@@ -17,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="15_7f1t3"]
 [ext_resource type="Script" path="res://Scripts/InGameUI.cs" id="16_g445g"]
 [ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://Scenes/pickup.tscn" id="17_0m028"]
+[ext_resource type="PackedScene" uid="uid://bl6n4xswgonjn" path="res://Scenes/Houses/house_01_01.tscn" id="18_sdvy4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
 texture = ExtResource("15_7f1t3")
@@ -368,9 +368,6 @@ b = Vector2(-131, 0)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_b013j"]
 b = Vector2(-228, -1)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_7kg5j"]
-b = Vector2(-245, 1)
-
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_vakky")
 _playerScene = ExtResource("2_mfanj")
@@ -428,11 +425,6 @@ scale = Vector2(4, 3)
 texture = ExtResource("9_rbxld")
 
 [node name="Visuals_buildings" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Visuals_buildings"]
-position = Vector2(-76, 206)
-scale = Vector2(2.12109, 2.8375)
-texture = ExtResource("10_fquy8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Visuals_buildings"]
 position = Vector2(1151, 160)
@@ -607,30 +599,6 @@ collision_layer = 3
 shape = SubResource("SegmentShape2D_b013j")
 one_way_collision = true
 
-[node name="StaticBody2D13" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(42, 131)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D13"]
-shape = SubResource("SegmentShape2D_7kg5j")
-one_way_collision = true
-
-[node name="StaticBody2D14" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(42, 239)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D14"]
-shape = SubResource("SegmentShape2D_7kg5j")
-one_way_collision = true
-
-[node name="StaticBody2D15" type="StaticBody2D" parent="Collisions/Buildings"]
-position = Vector2(41, 329)
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Collisions/Buildings/StaticBody2D15"]
-shape = SubResource("SegmentShape2D_7kg5j")
-one_way_collision = true
-
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 
 [node name="InGameUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_testLabel")]
@@ -644,3 +612,6 @@ text = "MOO"
 
 [node name="Pickup" parent="." instance=ExtResource("17_0m028")]
 position = Vector2(460, 431)
+
+[node name="House_01_01" parent="." instance=ExtResource("18_sdvy4")]
+position = Vector2(-87, 434)

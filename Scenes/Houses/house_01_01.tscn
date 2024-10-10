@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl6n4xswgonjn"]
+
+[ext_resource type="Texture2D" uid="uid://ccfmiv4nqbvf" path="res://Sprites/buildings/building_01.png" id="1_elmrv"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_7kg5j"]
+b = Vector2(-245, 1)
+
+[node name="House_01_01" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(10.7498, -230)
+scale = Vector2(2.12109, 2.8375)
+texture = ExtResource("1_elmrv")
+
+[node name="StaticBody2D13" type="StaticBody2D" parent="."]
+position = Vector2(128.75, -305)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D13"]
+shape = SubResource("SegmentShape2D_7kg5j")
+one_way_collision = true
+
+[node name="StaticBody2D14" type="StaticBody2D" parent="."]
+position = Vector2(128.75, -197)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D14"]
+shape = SubResource("SegmentShape2D_7kg5j")
+one_way_collision = true
+
+[node name="StaticBody2D15" type="StaticBody2D" parent="."]
+position = Vector2(127.75, -107)
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D15"]
+shape = SubResource("SegmentShape2D_7kg5j")
+one_way_collision = true
