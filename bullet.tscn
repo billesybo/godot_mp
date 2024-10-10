@@ -1,21 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://cmrr4rbaadtay"]
 
 [ext_resource type="Script" path="res://Bullet.cs" id="1_p7moq"]
-[ext_resource type="Texture2D" uid="uid://ce561td27benc" path="res://icon.svg" id="2_qbsiw"]
+[ext_resource type="Texture2D" uid="uid://bwjtjirc76td7" path="res://Sprites/Sniper_Shell.png" id="2_abbxd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwwg1"]
-size = Vector2(37, 4)
+size = Vector2(19, 4)
 
 [node name="Bullet" type="Area2D"]
 script = ExtResource("1_p7moq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(19, 0)
-scale = Vector2(0.3, 0.02)
-texture = ExtResource("2_qbsiw")
+position = Vector2(7, -9.53674e-07)
+rotation = 1.5708
+scale = Vector2(0.142188, 0.1975)
+texture = ExtResource("2_abbxd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(19.5, 0)
+position = Vector2(10.5, 0)
 shape = SubResource("RectangleShape2D_uwwg1")
 
 [node name="Timer" type="Timer" parent="."]
