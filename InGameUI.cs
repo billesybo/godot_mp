@@ -51,6 +51,6 @@ public partial class InGameUI : CanvasLayer
 
 	private void HandleGunSwitched()
 	{
-		_simpleGun = _localPawn.GetNode<SimpleGun>("GunRotation/Gun");
+		_simpleGun = _localPawn.Gun;
 	}
 }

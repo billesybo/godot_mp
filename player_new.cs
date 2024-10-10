@@ -38,7 +38,7 @@ public partial class player_new : CharacterBody2D
 
 	private Timer _respawnTimer;
 
-	private SimpleGun _gun; // TODO instantiate these
+	public SimpleGun Gun { get; private set; }
 
 	private MultiplayerSynchronizer _multiplayerSynchronizer;
 
@@ -111,16 +111,16 @@ public partial class player_new : CharacterBody2D
 		
 		if (Input.IsActionJustPressed("fire"))
 		{
-			_gun.TryFireGun(); 
+			Gun.TryFireGun(); 
 		}
 		else if (Input.IsActionPressed("fire")) // supppRREESSSING FIREEEEE!
 		{
-			_gun.TryAutoFire();
+			Gun.TryAutoFire();
 		}
 
 		if (Input.IsActionJustPressed("reload"))
 		{
-			_gun.TryReload();
+			Gun.TryReload();
 		}
 
 		Vector2 direction = Input.GetVector("left", "right", "up", "down");
@@ -187,18 +187,18 @@ public partial class player_new : CharacterBody2D
 
 		if (newGun != null)
 		{
-			_gun = newGun.Instantiate<SimpleGun>();
-			_gunRotation.AddChild(_gun);
+			Gun = newGun.Instantiate<SimpleGun>();
+			_gunRotation.AddChild(Gun);
 			EmitSignal(SignalName.GunSwitched);
 		}
 	}
 
 	void DespawnGun()
 	{
-		if (_gun != null)
+		if (Gun != null)
 		{
-			_gun.QueueFree();
-			_gun = null;
+			Gun.QueueFree();
+			Gun = null;
 		}
 	}
 
