@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://klqqw2evtp7g"]
+[gd_scene load_steps=7 format=3 uid="uid://klqqw2evtp7g"]
 
 [ext_resource type="Texture2D" uid="uid://ljy6ysmba06s" path="res://Sprites/buildings/building_03.png" id="1_s73e7"]
+[ext_resource type="Script" path="res://Scripts/RandomActivation.cs" id="2_68le3"]
+[ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://Scenes/pickup.tscn" id="3_x13hq"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_b6kbf"]
 a = Vector2(-126.33, 0)
@@ -45,3 +47,9 @@ collision_layer = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource("SegmentShape2D_wyx2u")
 one_way_collision = true
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(69, -137)
+script = ExtResource("2_68le3")
+_activationChance = 1.0
+_spawned = ExtResource("3_x13hq")

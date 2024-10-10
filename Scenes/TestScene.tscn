@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bo5jvxf56mmoj"]
+[gd_scene load_steps=22 format=3 uid="uid://bo5jvxf56mmoj"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_vakky"]
 [ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://Scenes/player.tscn" id="2_mfanj"]
@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://c7fblx01buq5g" path="res://Sprites/background/parallax_background_layer_5.png" id="9_rbxld"]
 [ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="15_7f1t3"]
 [ext_resource type="Script" path="res://Scripts/InGameUI.cs" id="16_g445g"]
-[ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://Scenes/pickup.tscn" id="17_0m028"]
 [ext_resource type="PackedScene" uid="uid://b7h2p0koc4igk" path="res://Scenes/Houses/house_05_01.tscn" id="17_8kp87"]
 [ext_resource type="PackedScene" uid="uid://klqqw2evtp7g" path="res://Scenes/Houses/house_03_01.tscn" id="17_gca2e"]
 [ext_resource type="PackedScene" uid="uid://bdt0qs3nqiptb" path="res://Scenes/Houses/house_04_01.tscn" id="17_l7hdf"]
@@ -474,9 +473,6 @@ _testLabel = NodePath("Label")
 offset_right = 40.0
 offset_bottom = 23.0
 text = "MOO"
-
-[node name="Pickup" parent="." instance=ExtResource("17_0m028")]
-position = Vector2(460, 431)
 
 [node name="House_01_01" parent="." instance=ExtResource("18_sdvy4")]
 position = Vector2(-87, 434)
