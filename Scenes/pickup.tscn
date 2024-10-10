@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://uwv14avxpy62"]
 
-[ext_resource type="Script" path="res://Pickup.cs" id="1_dutqr"]
+[ext_resource type="Script" path="res://Scripts/Pickup.cs" id="1_dutqr"]
 [ext_resource type="Texture2D" uid="uid://cmbut50jom6we" path="res://Sprites/GUNS_V1.00/V1.00/PNG/Assault_rifle_V1.01.png" id="2_s2rr5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5s50g"]

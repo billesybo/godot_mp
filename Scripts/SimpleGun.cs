@@ -75,6 +75,7 @@ public partial class SimpleGun : Node2D
 
 	public void TryReload()
 	{
+		GD.Print($"MEH reload ze gun");
 		Rpc("ReloadRPC");
 	}
 
@@ -82,6 +83,8 @@ public partial class SimpleGun : Node2D
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] 
 	void FireRPC()
 	{
+		GD.Print($"MEH shoot ze gun");
+		
 		Node2D bullet = Bullet.Instantiate<Node2D>();
 		bullet.RotationDegrees = _bulletSpawn.GlobalRotationDegrees; // RotationDegrees; //_rotationDegrees;
 		// bullet.GlobalPosition = GetNode<Node2D>("GunRotation/BulletSpawn").GlobalPosition;
@@ -95,6 +98,7 @@ public partial class SimpleGun : Node2D
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
 	void ReloadRPC()
 	{
+		GD.Print($"MEH shoot ze gun");
 		_reloadTimer.Start();
 	}
 

@@ -1,25 +1,25 @@
 [gd_scene load_steps=29 format=3 uid="uid://bo5jvxf56mmoj"]
 
-[ext_resource type="Script" path="res://SceneManager.cs" id="1_arae6"]
-[ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="1_t18u7"]
-[ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://player.tscn" id="2_xh1df"]
-[ext_resource type="Script" path="res://ParallaxScroll.cs" id="4_0vqci"]
-[ext_resource type="Texture2D" uid="uid://bouoac4k0p7gp" path="res://Sprites/background/parallax_background_layer_1.png" id="4_374eo"]
-[ext_resource type="Texture2D" uid="uid://bce04dwdsxpak" path="res://Sprites/background/parallax_background_layer_2.png" id="5_rx6lg"]
-[ext_resource type="Texture2D" uid="uid://dyom6d7dd6st5" path="res://Sprites/background/parallax_background_layer_3.png" id="6_uesrs"]
-[ext_resource type="Texture2D" uid="uid://bqw3kkw71ojfx" path="res://Sprites/background/parallax_background_layer_4.png" id="7_vux6y"]
-[ext_resource type="Texture2D" uid="uid://c7fblx01buq5g" path="res://Sprites/background/parallax_background_layer_5.png" id="8_gks1t"]
-[ext_resource type="Texture2D" uid="uid://ccfmiv4nqbvf" path="res://Sprites/buildings/building_01.png" id="8_kpxgv"]
-[ext_resource type="Texture2D" uid="uid://rd1o4bwt8wqw" path="res://Sprites/buildings/building_02.png" id="9_tq3fv"]
-[ext_resource type="Texture2D" uid="uid://ljy6ysmba06s" path="res://Sprites/buildings/building_03.png" id="10_4ktqi"]
-[ext_resource type="Texture2D" uid="uid://6mlq2vdr7bpy" path="res://Sprites/buildings/building_04.png" id="11_dcj7v"]
-[ext_resource type="Texture2D" uid="uid://dyktfjts1ieln" path="res://Sprites/buildings/building_05.png" id="12_dw0uc"]
-[ext_resource type="PackedScene" uid="uid://ci8ts2iosi271" path="res://enemy.tscn" id="15_8qhhw"]
-[ext_resource type="Script" path="res://InGameUI.cs" id="16_ha8sr"]
-[ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://pickup.tscn" id="17_y7bfp"]
+[ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_vakky"]
+[ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://Scenes/player.tscn" id="2_mfanj"]
+[ext_resource type="PackedScene" uid="uid://ci8ts2iosi271" path="res://Scenes/enemy.tscn" id="3_6eu0j"]
+[ext_resource type="Texture2D" uid="uid://bouoac4k0p7gp" path="res://Sprites/background/parallax_background_layer_1.png" id="4_o83p5"]
+[ext_resource type="Script" path="res://Scripts/ParallaxScroll.cs" id="5_osf0r"]
+[ext_resource type="Texture2D" uid="uid://bce04dwdsxpak" path="res://Sprites/background/parallax_background_layer_2.png" id="6_82pnk"]
+[ext_resource type="Texture2D" uid="uid://dyom6d7dd6st5" path="res://Sprites/background/parallax_background_layer_3.png" id="7_povdv"]
+[ext_resource type="Texture2D" uid="uid://bqw3kkw71ojfx" path="res://Sprites/background/parallax_background_layer_4.png" id="8_tr77s"]
+[ext_resource type="Texture2D" uid="uid://c7fblx01buq5g" path="res://Sprites/background/parallax_background_layer_5.png" id="9_rbxld"]
+[ext_resource type="Texture2D" uid="uid://ccfmiv4nqbvf" path="res://Sprites/buildings/building_01.png" id="10_fquy8"]
+[ext_resource type="Texture2D" uid="uid://rd1o4bwt8wqw" path="res://Sprites/buildings/building_02.png" id="11_ynt5r"]
+[ext_resource type="Texture2D" uid="uid://ljy6ysmba06s" path="res://Sprites/buildings/building_03.png" id="12_eq2e1"]
+[ext_resource type="Texture2D" uid="uid://6mlq2vdr7bpy" path="res://Sprites/buildings/building_04.png" id="13_y7lv8"]
+[ext_resource type="Texture2D" uid="uid://dyktfjts1ieln" path="res://Sprites/buildings/building_05.png" id="14_q1gyn"]
+[ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="15_7f1t3"]
+[ext_resource type="Script" path="res://Scripts/InGameUI.cs" id="16_g445g"]
+[ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://Scenes/pickup.tscn" id="17_0m028"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
-texture = ExtResource("1_t18u7")
+texture = ExtResource("15_7f1t3")
 1:1/0 = 0
 2:1/0 = 0
 3:1/0 = 0
@@ -372,9 +372,9 @@ b = Vector2(-228, -1)
 b = Vector2(-245, 1)
 
 [node name="Node2D" type="Node2D"]
-script = ExtResource("1_arae6")
-_playerScene = ExtResource("2_xh1df")
-_enemyScene = ExtResource("15_8qhhw")
+script = ExtResource("1_vakky")
+_playerScene = ExtResource("2_mfanj")
+_enemyScene = ExtResource("3_6eu0j")
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 offset = Vector2(0, 248.99)
@@ -387,18 +387,18 @@ motion_mirroring = Vector2(2048, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 scale = Vector2(4, 3)
-texture = ExtResource("4_374eo")
+texture = ExtResource("4_o83p5")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(518, 34.01)
 motion_scale = Vector2(0.15, 0.15)
 motion_mirroring = Vector2(2048, 0)
-script = ExtResource("4_0vqci")
+script = ExtResource("5_osf0r")
 _speed = 20.0
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
 scale = Vector2(4, 3)
-texture = ExtResource("5_rx6lg")
+texture = ExtResource("6_82pnk")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(518, 34.01)
@@ -407,7 +407,7 @@ motion_mirroring = Vector2(2048, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
 scale = Vector2(4, 3)
-texture = ExtResource("6_uesrs")
+texture = ExtResource("7_povdv")
 
 [node name="ParallaxLayer4" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(518, 34.01)
@@ -416,7 +416,7 @@ motion_mirroring = Vector2(2048, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer4"]
 scale = Vector2(4, 3)
-texture = ExtResource("7_vux6y")
+texture = ExtResource("8_tr77s")
 
 [node name="ParallaxLayer5" type="ParallaxLayer" parent="ParallaxBackground"]
 position = Vector2(518, 34.01)
@@ -425,34 +425,34 @@ motion_mirroring = Vector2(2048, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer5"]
 scale = Vector2(4, 3)
-texture = ExtResource("8_gks1t")
+texture = ExtResource("9_rbxld")
 
 [node name="Visuals_buildings" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Visuals_buildings"]
 position = Vector2(-76, 206)
 scale = Vector2(2.12109, 2.8375)
-texture = ExtResource("8_kpxgv")
+texture = ExtResource("10_fquy8")
 
 [node name="Sprite2D2" type="Sprite2D" parent="Visuals_buildings"]
 position = Vector2(1151, 160)
 scale = Vector2(2.12109, 3.82153)
-texture = ExtResource("9_tq3fv")
+texture = ExtResource("11_ynt5r")
 
 [node name="Sprite2D3" type="Sprite2D" parent="Visuals_buildings"]
 position = Vector2(1580, 128)
 scale = Vector2(2.12109, 3.82153)
-texture = ExtResource("10_4ktqi")
+texture = ExtResource("12_eq2e1")
 
 [node name="Sprite2D4" type="Sprite2D" parent="Visuals_buildings"]
 position = Vector2(744, 204)
 scale = Vector2(2.66992, 2.84826)
-texture = ExtResource("11_dcj7v")
+texture = ExtResource("13_y7lv8")
 
 [node name="Sprite2D5" type="Sprite2D" parent="Visuals_buildings"]
 position = Vector2(256, 151)
 scale = Vector2(1.96777, 2.52681)
-texture = ExtResource("12_dw0uc")
+texture = ExtResource("14_q1gyn")
 
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(6, 78)
@@ -634,7 +634,7 @@ one_way_collision = true
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 
 [node name="InGameUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_testLabel")]
-script = ExtResource("16_ha8sr")
+script = ExtResource("16_g445g")
 _testLabel = NodePath("Label")
 
 [node name="Label" type="Label" parent="InGameUI"]
@@ -642,5 +642,5 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "MOO"
 
-[node name="Pickup" parent="." instance=ExtResource("17_y7bfp")]
+[node name="Pickup" parent="." instance=ExtResource("17_0m028")]
 position = Vector2(460, 431)

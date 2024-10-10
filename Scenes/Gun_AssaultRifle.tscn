@@ -1,13 +1,13 @@
 [gd_scene load_steps=5 format=3 uid="uid://0sxc1083ldmr"]
 
-[ext_resource type="Script" path="res://SimpleGun.cs" id="1_t08ma"]
-[ext_resource type="PackedScene" uid="uid://cmrr4rbaadtay" path="res://bullet.tscn" id="2_edqbl"]
-[ext_resource type="Texture2D" uid="uid://cmbut50jom6we" path="res://Sprites/GUNS_V1.00/V1.00/PNG/Assault_rifle_V1.01.png" id="3_txo1p"]
-[ext_resource type="AudioStream" uid="uid://blvuidskeqw2f" path="res://Audio/Balloon Pop 1.wav" id="4_jsjpw"]
+[ext_resource type="Script" path="res://Scripts/SimpleGun.cs" id="1_681ww"]
+[ext_resource type="PackedScene" uid="uid://cmrr4rbaadtay" path="res://Scenes/bullet.tscn" id="2_fep7t"]
+[ext_resource type="Texture2D" uid="uid://cmbut50jom6we" path="res://Sprites/GUNS_V1.00/V1.00/PNG/Assault_rifle_V1.01.png" id="3_ubddl"]
+[ext_resource type="AudioStream" uid="uid://blvuidskeqw2f" path="res://Audio/Balloon Pop 1.wav" id="4_ncfdl"]
 
 [node name="Gun" type="Node2D" node_paths=PackedStringArray("_fireSound", "_fireTimer", "_reloadTimer")]
-script = ExtResource("1_t08ma")
-Bullet = ExtResource("2_edqbl")
+script = ExtResource("1_681ww")
+Bullet = ExtResource("2_fep7t")
 _fireSound = NodePath("GunSound")
 _fireTimer = NodePath("FireTimer")
 _reloadTimer = NodePath("ReloadTimer")
@@ -17,13 +17,13 @@ _autoFire = true
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(43, 0)
 scale = Vector2(0.59375, 0.583333)
-texture = ExtResource("3_txo1p")
+texture = ExtResource("3_ubddl")
 
 [node name="BulletSpawn" type="Node2D" parent="."]
 position = Vector2(34, -3)
 
 [node name="GunSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_jsjpw")
+stream = ExtResource("4_ncfdl")
 bus = &"Effects"
 
 [node name="FireTimer" type="Timer" parent="."]

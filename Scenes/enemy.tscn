@@ -1,59 +1,59 @@
 [gd_scene load_steps=21 format=3 uid="uid://ci8ts2iosi271"]
 
-[ext_resource type="Script" path="res://enemy.cs" id="1_4re1t"]
-[ext_resource type="Texture2D" uid="uid://d3cqc8pg35sp" path="res://Sprites/Spritesheets/hostiles_spritesheet.png" id="1_lbbtu"]
-[ext_resource type="FontFile" uid="uid://b6nnr8e7tj86m" path="res://Fonts/good times rg.otf" id="3_h27sw"]
+[ext_resource type="Script" path="res://Scripts/enemy.cs" id="1_ap2be"]
+[ext_resource type="Texture2D" uid="uid://d3cqc8pg35sp" path="res://Sprites/Spritesheets/hostiles_spritesheet.png" id="2_fdm0g"]
+[ext_resource type="FontFile" uid="uid://b6nnr8e7tj86m" path="res://Fonts/good times rg.otf" id="3_rdu0j"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p5djx"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(0, 448, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2asup"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(32, 448, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_idog4"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(64, 448, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n4arr"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(96, 448, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p51yb"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(128, 448, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e1hyg"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(0, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5ttq8"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(32, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_tod5u"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(64, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l345d"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3fvi2"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(128, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l8g22"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(160, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7ow0"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(192, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jcct3"]
-atlas = ExtResource("1_lbbtu")
+atlas = ExtResource("2_fdm0g")
 region = Rect2(224, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v73y5"]
@@ -124,7 +124,7 @@ size = Vector2(46, 20)
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemies"]]
 collision_mask = 2
-script = ExtResource("1_4re1t")
+script = ExtResource("1_ap2be")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -32)
@@ -144,7 +144,7 @@ offset_right = 56.0
 offset_bottom = -40.0
 auto_translate = false
 localize_numeral_system = false
-theme_override_fonts/font = ExtResource("3_h27sw")
+theme_override_fonts/font = ExtResource("3_rdu0j")
 theme_override_font_sizes/font_size = 12
 horizontal_alignment = 1
 max_lines_visible = 1

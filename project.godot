@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="MPTest"
-run/main_scene="res://multiplayer_controller.tscn"
+run/main_scene="res://Scenes/multiplayer_controller.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -21,7 +21,7 @@ buses/default_bus_layout="res://Audio/default_bus_layout.tres"
 
 [autoload]
 
-GameManager="*res://GameManager.cs"
+GameManager="*res://Scripts/GameManager.cs"
 
 [dotnet]
 

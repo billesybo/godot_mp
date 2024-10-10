@@ -20,7 +20,7 @@ public partial class SceneManager : Node2D
 
 	private int _enemySpawnIndex = 0;
 
-	private const int EnemyMax = 5;
+	private const int EnemyMax = 0;
 	
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
