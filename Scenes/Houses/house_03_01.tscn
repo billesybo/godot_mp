@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://klqqw2evtp7g"]
+[gd_scene load_steps=10 format=3 uid="uid://klqqw2evtp7g"]
 
 [ext_resource type="Texture2D" uid="uid://ljy6ysmba06s" path="res://Sprites/buildings/building_03.png" id="1_s73e7"]
+[ext_resource type="Script" path="res://Scripts/SpawnElement.cs" id="1_tsayq"]
 [ext_resource type="Script" path="res://Scripts/RandomActivation.cs" id="2_68le3"]
 [ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://Scenes/pickup.tscn" id="3_x13hq"]
 
@@ -15,7 +16,17 @@ b = Vector2(-129, 1)
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_wyx2u"]
 b = Vector2(-126.75, 1.85001)
 
-[node name="House_03_01" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vas20"]
+size = Vector2(323, 149.364)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_k04xi"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="House_03_01" type="Node2D" node_paths=PackedStringArray("_shape")]
+script = ExtResource("1_tsayq")
+_shape = NodePath("Area2D/CollisionShape2D")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 position = Vector2(6, -309)
@@ -53,3 +64,17 @@ position = Vector2(69, -137)
 script = ExtResource("2_68le3")
 _activationChance = 1.0
 _spawned = ExtResource("3_x13hq")
+
+[node name="Area2D" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 0
+visibility_layer = 0
+position = Vector2(1.49999, -68.6818)
+shape = SubResource("RectangleShape2D_vas20")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_k04xi")
+script = ExtResource("1_tsayq")

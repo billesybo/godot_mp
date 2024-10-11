@@ -254,6 +254,7 @@ properties/3/spawn = true
 properties/3/replication_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["Player"]]
+z_index = 10
 collision_layer = 5
 script = ExtResource("1_367u7")
 Bullet = ExtResource("2_dp3ow")

@@ -6,6 +6,7 @@ using MPTest;
 public partial class MultiplayerController : Control
 {
 	private const string TestScenePath = "res://Scenes/TestScene.tscn";
+	private const string RandomScenePath = "res://Scenes/RandomScene.tscn";
 	
 	[Export]
 	private int _port = 28910;
@@ -148,7 +149,7 @@ public partial class MultiplayerController : Control
 			AddToLog($"Player: {player.Name} id : {player.Id}");
 		}
 		
-		Node2D scene = ResourceLoader.Load<PackedScene>(TestScenePath).Instantiate<Node2D>();
+		Node2D scene = ResourceLoader.Load<PackedScene>(RandomScenePath).Instantiate<Node2D>();
 		GetTree().Root.AddChild(scene);
 		this.Hide(); // hide UI (queue free??)
 	}

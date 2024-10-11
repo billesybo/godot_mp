@@ -123,6 +123,7 @@ properties/1/replication_mode = 1
 size = Vector2(46, 20)
 
 [node name="Enemy" type="CharacterBody2D" groups=["Enemies"]]
+z_index = 9
 collision_mask = 2
 script = ExtResource("1_ap2be")
 

@@ -1,11 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://b7h2p0koc4igk"]
+[gd_scene load_steps=6 format=3 uid="uid://b7h2p0koc4igk"]
 
+[ext_resource type="Script" path="res://Scripts/SpawnElement.cs" id="1_22djb"]
 [ext_resource type="Texture2D" uid="uid://dyktfjts1ieln" path="res://Sprites/buildings/building_05.png" id="1_xle2p"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_b013j"]
 b = Vector2(-228, -1)
 
-[node name="Hosue_05_01" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_443gw"]
+size = Vector2(336, 644)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_amg31"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="Hosue_05_01" type="Node2D" node_paths=PackedStringArray("_shape")]
+script = ExtResource("1_22djb")
+_shape = NodePath("Area2D/CollisionShape2D")
 
 [node name="Sprite2D5" type="Sprite2D" parent="."]
 position = Vector2(9.9373, -286.997)
@@ -51,3 +62,17 @@ collision_layer = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D12"]
 shape = SubResource("SegmentShape2D_b013j")
 one_way_collision = true
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(6, -309)
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 0
+visibility_layer = 0
+position = Vector2(-10, -27)
+shape = SubResource("RectangleShape2D_443gw")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_amg31")
