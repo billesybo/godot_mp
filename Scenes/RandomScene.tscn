@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://bqw3kkw71ojfx" path="res://Sprites/background/parallax_background_layer_4.png" id="8_4i86b"]
 [ext_resource type="Texture2D" uid="uid://c7fblx01buq5g" path="res://Sprites/background/parallax_background_layer_5.png" id="9_waq3f"]
 [ext_resource type="Texture2D" uid="uid://b2dsuom0ks0ag" path="res://Sprites/main_tileset.png" id="10_wa435"]
-[ext_resource type="Script" path="res://Scripts/InGameUI.cs" id="11_c8a4s"]
 [ext_resource type="PackedScene" uid="uid://bl6n4xswgonjn" path="res://Scenes/Houses/house_01_01.tscn" id="12_4pp8c"]
 [ext_resource type="Script" path="res://Scripts/TerrainSpawner.cs" id="12_umt7i"]
 [ext_resource type="PackedScene" uid="uid://cf1aygxyoxmw4" path="res://Scenes/Houses/house_02_01.tscn" id="13_durn1"]
@@ -18,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bdt0qs3nqiptb" path="res://Scenes/Houses/house_04_01.tscn" id="15_jiljq"]
 [ext_resource type="PackedScene" uid="uid://b7h2p0koc4igk" path="res://Scenes/Houses/house_05_01.tscn" id="16_le7lo"]
 [ext_resource type="PackedScene" uid="uid://bu37mei34gvok" path="res://Scenes/SpawnPickup.tscn" id="17_4ijc5"]
+[ext_resource type="PackedScene" uid="uid://bb8y5wnqu88d4" path="res://Scenes/in_game_ui.tscn" id="18_wjhku"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
 texture = ExtResource("10_wa435")
@@ -477,11 +477,4 @@ shape = SubResource("WorldBoundaryShape2D_irm0j")
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 
-[node name="InGameUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("_testLabel")]
-script = ExtResource("11_c8a4s")
-_testLabel = NodePath("Label")
-
-[node name="Label" type="Label" parent="InGameUI"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "MOO"
+[node name="InGameUI" parent="." instance=ExtResource("18_wjhku")]

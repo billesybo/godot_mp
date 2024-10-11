@@ -5,8 +5,10 @@ using MPTest;
 public partial class InGameUI : CanvasLayer
 {
 	[Export] private Label _testLabel;
+	[Export] private Label _scoreLabel;
 	
 	private player_new _localPawn;
+	private PlayerInfo _playerInfo;
 	private SimpleGun _simpleGun;
 
 	public override void _Ready()
@@ -23,6 +25,11 @@ public partial class InGameUI : CanvasLayer
 			SetupListeners();
 		}
 
+		if (_playerInfo == null)
+		{
+			_playerInfo = GameManager.GetLocalPlayerInfo();
+		}
+
 		// if (_localPawn != null) // TEST BS
 		// {
 		// 	_testLabel.Text = _localPawn.Name;
@@ -31,6 +38,11 @@ public partial class InGameUI : CanvasLayer
 		if (_simpleGun != null)
 		{
 			ShowAmmoCount();
+		}
+
+		if (_playerInfo != null)
+		{
+			_scoreLabel.Text = $"Score {_playerInfo.Score}";
 		}
 	}
 

@@ -10,6 +10,8 @@ public partial class Bullet : Area2D
 
 	private Vector2 _direction;
 	private bool _hitSomething;
+
+	public int OwnerId;
 	
 	public override void _Ready()
 	{
@@ -38,12 +40,12 @@ public partial class Bullet : Area2D
 		
 		if (node.IsInGroup("Player"))
 		{
-			((player_new)node).DoDamage();
+			((player_new)node).DoDamage(OwnerId);
 		}
 
 		if (node.IsInGroup("Enemies"))
 		{
-			((enemy)node).DoDamage();
+			((enemy)node).DoDamage(OwnerId);
 		}
 
 		QueueFree();

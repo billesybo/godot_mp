@@ -113,11 +113,11 @@ public partial class player_new : CharacterBody2D
 		
 		if (Input.IsActionJustPressed("fire"))
 		{
-			Gun.TryFireGun(); 
+			Gun.TryFireGun(_multiplayerSynchronizer.GetMultiplayerAuthority()); 
 		}
 		else if (Input.IsActionPressed("fire")) // supppRREESSSING FIREEEEE!
 		{
-			Gun.TryAutoFire();
+			Gun.TryAutoFire(_multiplayerSynchronizer.GetMultiplayerAuthority());
 		}
 
 		if (Input.IsActionJustPressed("reload"))
@@ -225,7 +225,7 @@ public partial class player_new : CharacterBody2D
 		GetNode<Label>("Label").Text = name;
 	}
 
-	public void DoDamage()
+	public void DoDamage(int ownerId)
 	{
 		if (_dead)
 			return;
@@ -242,6 +242,9 @@ public partial class player_new : CharacterBody2D
 			_animatedSprite.Play("death");
 			_respawnTimer.Start();
 			_respawnTimer.Timeout += Respawn;
+			
+			// TODO score ?? 
+			GameManager.AddScore(ownerId, 20);
 		}
 	}
 

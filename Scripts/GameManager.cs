@@ -14,7 +14,7 @@ public partial class GameManager : Node
 	public static int NumEnemies;
 
 	
-
+	// SUX! IMPROVE THESE
 	public static player_new GetLocalPlayerPawn()
 	{
 		foreach (PlayerInfo info in Players)
@@ -26,6 +26,31 @@ public partial class GameManager : Node
 		}
 
 		return null;
+	}
+
+	public static PlayerInfo GetLocalPlayerInfo() 
+	{
+		foreach (PlayerInfo info in Players)
+		{
+			if (info.PlayerPawn != null && info.PlayerPawn.IsLocalOwned)
+			{
+				return info;
+			}
+		}
+
+		return null;
+	}
+
+	public static void AddScore(int id, int score)
+	{
+		foreach (PlayerInfo info in Players)
+		{
+			if (info.Id == id)
+			{
+				info.Score += score;
+				return;
+			}
+		}
 	}
 
 	// public static void NotifySceneManagerInitialized()

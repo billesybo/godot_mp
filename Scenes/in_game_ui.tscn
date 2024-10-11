@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bb8y5wnqu88d4"]
+
+[ext_resource type="Script" path="res://Scripts/InGameUI.cs" id="1_aun72"]
+
+[node name="InGameUI" type="CanvasLayer" node_paths=PackedStringArray("_testLabel", "_scoreLabel")]
+script = ExtResource("1_aun72")
+_testLabel = NodePath("Label")
+_scoreLabel = NodePath("Label2")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "MOO"
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 592.0
+offset_top = 6.0
+offset_right = 632.0
+offset_bottom = 29.0

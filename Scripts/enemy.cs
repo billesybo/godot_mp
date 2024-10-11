@@ -42,6 +42,8 @@ public partial class enemy : CharacterBody2D
 		
 		UpdateAnimation();
 		
+		_talkTimer.Timeout += HandleSayTimeout;
+		
 		// THIS IS SHIT
 		GameManager.NumEnemies++;
 	}
@@ -102,7 +104,7 @@ public partial class enemy : CharacterBody2D
 		}
 	}
 
-	public void DoDamage()
+	public void DoDamage(int ownerId)
 	{
 		ShowPainText();
 
@@ -112,6 +114,8 @@ public partial class enemy : CharacterBody2D
 		{
 			Rpc("RemoveEnemyRPC");
 		}
+		
+		GameManager.AddScore(ownerId, 10);
 	}
 
 	[Rpc(MultiplayerApi.RpcMode.Authority, CallLocal = true, TransferMode = MultiplayerPeer.TransferModeEnum.Reliable)]
@@ -123,22 +127,25 @@ public partial class enemy : CharacterBody2D
 
 	void ShowPainText()
 	{
-		if(_talkTimer.IsStopped())
-			Say(TextCollection.GetRandomOuch());	
+		Say(TextCollection.GetRandomOuch());	
 	}
 
-	void Say(string toSay, float chance = 1f)
+	void Say(string toSay, float chance = 1f) // TODO move all the stupid talking logic to its own class
 	{
+		// if (_talkTimer.IsStopped())
+		// 	return;
+		
 		_label.Text = toSay;
 		_talkTimer.Start();
-		_talkTimer.Timeout -= HandleSayTimeout;
-		_talkTimer.Timeout += HandleSayTimeout;
+		// _talkTimer.Timeout -= HandleSayTimeout;
+		// _talkTimer.Timeout += HandleSayTimeout;
 	}
 
 	private void HandleSayTimeout()
 	{
 		_label.Text = String.Empty;
-		_talkTimer.Timeout -= HandleSayTimeout;
+		_talkTimer.Stop();
+		//_talkTimer.Timeout -= HandleSayTimeout;
 	}
 
 	void Cleanup()
@@ -146,6 +153,7 @@ public partial class enemy : CharacterBody2D
 		// THIS IS SHIT
 		GameManager.NumEnemies--;
 
+		//_talkTimer.
 		_talkTimer.Timeout -= HandleSayTimeout;
 	}
 
@@ -178,7 +186,7 @@ public partial class enemy : CharacterBody2D
 		_animatedSprite.Play("attack");
 		_animatedSprite.AnimationFinished += AttackFinished;
 		UpdateAnimation();
-		((player_new)node).DoDamage();
+		((player_new)node).DoDamage(-1);
 	}
 
 	private void AttackFinished()

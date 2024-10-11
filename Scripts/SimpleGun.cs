@@ -59,7 +59,7 @@ public partial class SimpleGun : Node2D
 		_reloadTimer.Stop();
 	}
 
-	public void TryFireGun()
+	public void TryFireGun(int multiplayerAuthority)
 	{
 		if (CurrentAmmo <= 0)
 		{
@@ -80,13 +80,13 @@ public partial class SimpleGun : Node2D
 
 		_fireTimer.Start();
 		CurrentAmmo--;
-		Rpc("FireRPC");
+		Rpc("FireRPC", multiplayerAuthority);
 	}
 
-	public void TryAutoFire()
+	public void TryAutoFire(int multiplayerAuthority)
 	{
 		if(_autoFire)
-			TryFireGun();
+			TryFireGun(multiplayerAuthority);
 	}
 
 	public void TryReload()
@@ -97,14 +97,16 @@ public partial class SimpleGun : Node2D
 
 
 	[Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] 
-	void FireRPC()
+	void FireRPC(int multiplayerAuthority)
 	{
-		GD.Print($"MEH shoot ze gun. Server {Multiplayer.IsServer()}");
+		GD.Print($"MEH shoot ze gun. Server {Multiplayer.IsServer()} {multiplayerAuthority}");
 		
-		Node2D bullet = Bullet.Instantiate<Node2D>();
+		Bullet bullet = Bullet.Instantiate<Bullet>();
 		bullet.RotationDegrees = _bulletSpawn.GlobalRotationDegrees; // RotationDegrees; //_rotationDegrees;
 		// bullet.GlobalPosition = GetNode<Node2D>("GunRotation/BulletSpawn").GlobalPosition;
 		bullet.GlobalPosition = _bulletSpawn.GlobalPosition;
+		bullet.OwnerId = multiplayerAuthority;
+		
 		GetTree().Root.AddChild(bullet);
 		
 		//EmitSignal(SignalName.GunFired);
