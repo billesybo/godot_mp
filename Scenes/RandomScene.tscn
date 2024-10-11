@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://boajugg0p8w7h"]
+[gd_scene load_steps=24 format=3 uid="uid://boajugg0p8w7h"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_frkgv"]
 [ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://Scenes/player.tscn" id="2_wtx6p"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://klqqw2evtp7g" path="res://Scenes/Houses/house_03_01.tscn" id="14_0xlbi"]
 [ext_resource type="PackedScene" uid="uid://bdt0qs3nqiptb" path="res://Scenes/Houses/house_04_01.tscn" id="15_jiljq"]
 [ext_resource type="PackedScene" uid="uid://b7h2p0koc4igk" path="res://Scenes/Houses/house_05_01.tscn" id="16_le7lo"]
+[ext_resource type="PackedScene" uid="uid://bu37mei34gvok" path="res://Scenes/SpawnPickup.tscn" id="17_4ijc5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
 texture = ExtResource("10_wa435")
@@ -416,7 +417,7 @@ layer_0/tile_data = PackedInt32Array(1507327, 393216, 12, 1441792, 393216, 12, 1
 spawn_path = NodePath("Position")
 spawn_limit = 25
 script = ExtResource("12_umt7i")
-_spawnElements = Array[PackedScene]([ExtResource("12_4pp8c"), ExtResource("13_durn1"), ExtResource("14_0xlbi"), ExtResource("15_jiljq"), ExtResource("16_le7lo")])
+_spawnElements = Array[PackedScene]([ExtResource("12_4pp8c"), ExtResource("13_durn1"), ExtResource("14_0xlbi"), ExtResource("15_jiljq"), ExtResource("16_le7lo"), ExtResource("17_4ijc5")])
 _startPoint = NodePath("Position")
 
 [node name="Position" type="Node2D" parent="TerrainSpawner"]

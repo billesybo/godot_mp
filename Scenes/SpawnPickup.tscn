@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://bu37mei34gvok"]
+
+[ext_resource type="Script" path="res://Scripts/SpawnElement.cs" id="1_38v5t"]
+[ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://Scenes/pickup.tscn" id="2_ydku6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jerxl"]
+size = Vector2(99, 71)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gkvvv"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+
+[node name="SpawnPickup" type="Node2D" node_paths=PackedStringArray("_shape")]
+script = ExtResource("1_38v5t")
+_shape = NodePath("Area2D/CollisionShape2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+light_mask = 0
+visibility_layer = 0
+position = Vector2(-1.5, -31.5)
+shape = SubResource("RectangleShape2D_jerxl")
+
+[node name="Pickup" parent="." instance=ExtResource("2_ydku6")]
+position = Vector2(-8, 0)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_gkvvv")
