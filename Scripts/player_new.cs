@@ -53,8 +53,6 @@ public partial class player_new : CharacterBody2D
 			return _multiplayerSynchronizer.GetMultiplayerAuthority() == Multiplayer.GetUniqueId();
 		}
 	}
-
-	// private CharacterAudio _characterAudio;
 	
 	public override void _Ready()
 	{
@@ -66,12 +64,9 @@ public partial class player_new : CharacterBody2D
 		_animatedSprite = GetNode<AnimatedSprite2D> ("AnimatedSprite2D");
 		_respawnTimer = GetNode<Timer>("RespawnTimer");
 
-		// _characterAudio = GetNode<CharacterAudio>("CharacterAudio");
-
 		_health = StartHealth;
 		UpdateHealthVisuals();
 
-		//_gun = GetNode<SimpleGun>("GunRotation/GunPistol");
 		SwitchGun(GunKind.Pistol);
 
 		Input.MouseMode = Input.MouseModeEnum.Confined;
@@ -208,17 +203,6 @@ public partial class player_new : CharacterBody2D
 			Gun = null;
 		}
 	}
-
-	// [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)] // TODO move to gun class
-	// void FireRPC(float rotationDegrees)
-	// {
-	// 	Node2D bullet = Bullet.Instantiate<Node2D>();
-	// 	bullet.RotationDegrees = rotationDegrees; //_gunRotation.RotationDegrees;
-	// 	bullet.GlobalPosition = GetNode<Node2D>("GunRotation/BulletSpawn").GlobalPosition;
-	// 	GetTree().Root.AddChild(bullet);
-	// 	
-	// 	EmitSignal(SignalName.GunFired);
-	// }
 
 	public void ShowName(string name)
 	{

@@ -75,13 +75,19 @@ shape = SubResource("RectangleShape2D_vi14r")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_35lm5")
 
-[node name="Spawner" type="MultiplayerSpawner" parent="." node_paths=PackedStringArray("_spawnRoot")]
+[node name="Spawner" type="MultiplayerSpawner" parent="." node_paths=PackedStringArray("_spawnRoot", "_timer")]
 spawn_path = NodePath("../PickupSpawnRoot")
 spawn_limit = 100
 script = ExtResource("3_ybd1f")
 _activationChance = 0.2
 _spawned = ExtResource("4_ug8a1")
 _spawnRoot = NodePath("../PickupSpawnRoot")
+_timer = NodePath("Timer")
+_minTime = 10.0
+_maxTime = 20.0
+
+[node name="Timer" type="Timer" parent="Spawner"]
+wait_time = 20.0
 
 [node name="PickupSpawnRoot" type="Node2D" parent="."]
 position = Vector2(-35, -537)
