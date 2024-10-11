@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cf1aygxyoxmw4"]
+[gd_scene load_steps=9 format=3 uid="uid://cf1aygxyoxmw4"]
 
 [ext_resource type="Script" path="res://Scripts/SpawnElement.cs" id="1_k2gg6"]
 [ext_resource type="Texture2D" uid="uid://rd1o4bwt8wqw" path="res://Sprites/buildings/building_02.png" id="1_r3ld5"]
+[ext_resource type="Script" path="res://Scripts/RandomActivation.cs" id="3_ybd1f"]
+[ext_resource type="PackedScene" uid="uid://uwv14avxpy62" path="res://Scenes/pickup.tscn" id="4_ug8a1"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_b6kbf"]
 a = Vector2(-126.33, 0)
@@ -72,3 +74,14 @@ shape = SubResource("RectangleShape2D_vi14r")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_35lm5")
+
+[node name="Spawner" type="MultiplayerSpawner" parent="." node_paths=PackedStringArray("_spawnRoot")]
+spawn_path = NodePath("../PickupSpawnRoot")
+spawn_limit = 100
+script = ExtResource("3_ybd1f")
+_activationChance = 0.2
+_spawned = ExtResource("4_ug8a1")
+_spawnRoot = NodePath("../PickupSpawnRoot")
+
+[node name="PickupSpawnRoot" type="Node2D" parent="."]
+position = Vector2(-35, -537)
