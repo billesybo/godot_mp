@@ -270,6 +270,8 @@ public partial class player_new : CharacterBody2D
 		newPos += Vector2.Up *700;
 		GlobalPosition = newPos;
 		
+		SwitchGun(GunKind.Pistol);
+		
 		UpdateHealthVisuals();
 	}
 }
