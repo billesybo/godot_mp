@@ -22,8 +22,3 @@ public partial class Pickup : Area2D
 	}
 }
 
-
-//private void OnBodyEntered(Node2D body)
-//{
-	//// Replace with function body.
-//}

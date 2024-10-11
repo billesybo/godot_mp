@@ -123,7 +123,8 @@ public partial class enemy : CharacterBody2D
 
 	void ShowPainText()
 	{
-		Say(TextCollection.GetRandomOuch());	
+		if(_talkTimer.IsStopped())
+			Say(TextCollection.GetRandomOuch());	
 	}
 
 	void Say(string toSay, float chance = 1f)
