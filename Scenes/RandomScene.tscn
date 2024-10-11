@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://boajugg0p8w7h"]
+[gd_scene load_steps=23 format=3 uid="uid://boajugg0p8w7h"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_frkgv"]
 [ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://Scenes/player.tscn" id="2_wtx6p"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://bl6n4xswgonjn" path="res://Scenes/Houses/house_01_01.tscn" id="12_4pp8c"]
 [ext_resource type="Script" path="res://Scripts/TerrainSpawner.cs" id="12_umt7i"]
 [ext_resource type="PackedScene" uid="uid://cf1aygxyoxmw4" path="res://Scenes/Houses/house_02_01.tscn" id="13_durn1"]
+[ext_resource type="PackedScene" uid="uid://klqqw2evtp7g" path="res://Scenes/Houses/house_03_01.tscn" id="14_0xlbi"]
 [ext_resource type="PackedScene" uid="uid://bdt0qs3nqiptb" path="res://Scenes/Houses/house_04_01.tscn" id="15_jiljq"]
 [ext_resource type="PackedScene" uid="uid://b7h2p0koc4igk" path="res://Scenes/Houses/house_05_01.tscn" id="16_le7lo"]
 
@@ -415,7 +416,7 @@ layer_0/tile_data = PackedInt32Array(1507327, 393216, 12, 1441792, 393216, 12, 1
 spawn_path = NodePath("Position")
 spawn_limit = 25
 script = ExtResource("12_umt7i")
-_spawnElements = Array[PackedScene]([ExtResource("12_4pp8c"), ExtResource("13_durn1"), ExtResource("15_jiljq"), ExtResource("16_le7lo")])
+_spawnElements = Array[PackedScene]([ExtResource("12_4pp8c"), ExtResource("13_durn1"), ExtResource("14_0xlbi"), ExtResource("15_jiljq"), ExtResource("16_le7lo")])
 _startPoint = NodePath("Position")
 
 [node name="Position" type="Node2D" parent="TerrainSpawner"]

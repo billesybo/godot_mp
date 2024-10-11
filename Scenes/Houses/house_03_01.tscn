@@ -77,4 +77,3 @@ shape = SubResource("RectangleShape2D_vas20")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_k04xi")
-script = ExtResource("1_tsayq")
