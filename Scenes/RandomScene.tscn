@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://boajugg0p8w7h"]
+[gd_scene load_steps=25 format=3 uid="uid://boajugg0p8w7h"]
 
 [ext_resource type="Script" path="res://Scripts/SceneManager.cs" id="1_frkgv"]
 [ext_resource type="PackedScene" uid="uid://d3me6dahwxn0q" path="res://Scenes/player.tscn" id="2_wtx6p"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://b7h2p0koc4igk" path="res://Scenes/Houses/house_05_01.tscn" id="16_le7lo"]
 [ext_resource type="PackedScene" uid="uid://bu37mei34gvok" path="res://Scenes/SpawnPickup.tscn" id="17_4ijc5"]
 [ext_resource type="PackedScene" uid="uid://bb8y5wnqu88d4" path="res://Scenes/in_game_ui.tscn" id="18_wjhku"]
+[ext_resource type="Script" path="res://Scripts/GameEnder.cs" id="19_7jbkp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi4kc"]
 texture = ExtResource("10_wa435")
@@ -351,7 +352,7 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_irm0j"]
 normal = Vector2(-1, 0)
 
-[node name="Node2D" type="Node2D"]
+[node name="RandomScene" type="Node2D"]
 script = ExtResource("1_frkgv")
 _playerScene = ExtResource("2_wtx6p")
 _enemyScene = ExtResource("3_4rixm")
@@ -478,3 +479,6 @@ shape = SubResource("WorldBoundaryShape2D_irm0j")
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 
 [node name="InGameUI" parent="." instance=ExtResource("18_wjhku")]
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("19_7jbkp")

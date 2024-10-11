@@ -1,18 +1,14 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 using MPTest;
 
 public partial class GameManager : Node
 {
-	// [Signal]
-	// public delegate void SceneManagerInitializedEventHandler();
-
-	
 	public static List<PlayerInfo> Players = new List<PlayerInfo>();
 
 	public static int NumEnemies;
 
+	public static bool Done;
 	
 	// SUX! IMPROVE THESE
 	public static player_new GetLocalPlayerPawn()
@@ -48,15 +44,19 @@ public partial class GameManager : Node
 			if (info.Id == id)
 			{
 				info.Score += score;
+
+				CheckGameOver(info.Score);
 				return;
 			}
 		}
 	}
 
-	// public static void NotifySceneManagerInitialized()
-	// {
-	// 	EmitSignal(SignalName.SceneManagerInitialized);
-	// }
-
+	static void CheckGameOver(int score)
+	{
+		if (score > 10)
+		{
+			Done = true;
+		}
+	}
 
 }
