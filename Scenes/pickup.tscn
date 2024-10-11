@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://uwv14avxpy62"]
+[gd_scene load_steps=6 format=3 uid="uid://uwv14avxpy62"]
 
 [ext_resource type="Script" path="res://Scripts/Pickup.cs" id="1_dutqr"]
 [ext_resource type="Texture2D" uid="uid://m003kemo07i1" path="res://Sprites/crate.png" id="2_itduy"]
@@ -6,6 +6,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5s50g"]
 size = Vector2(69, 25)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3ajn7"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 2
 
 [node name="Pickup" type="Area2D"]
 script = ExtResource("1_dutqr")
@@ -23,5 +28,8 @@ texture = ExtResource("2_itduy")
 position = Vector2(24, -15)
 scale = Vector2(0.78125, 0.645833)
 texture = ExtResource("2_s2rr5")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_3ajn7")
 
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

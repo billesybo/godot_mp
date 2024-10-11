@@ -3,15 +3,19 @@ using System;
 using Godot.Collections;
 using Range = Godot.Range;
 
-public partial class RandomActivation : Node2D
+public partial class RandomActivation : MultiplayerSpawner
 {
 	[Export] 
 	private float _activationChance;
 
 	[Export] private PackedScene _spawned;
 
+	[Export] private Node2D _spawnRoot;
+
 	public override void _Ready()
 	{
+		AddSpawnableScene(_spawned.ResourcePath);
+		
 		if (Multiplayer.IsServer())
 		{
 			bool activate = GD.Randf() < _activationChance;
@@ -20,22 +24,10 @@ public partial class RandomActivation : Node2D
 			{
 				GD.Print("LE SPAWNZ");
 				Area2D spawned = _spawned.Instantiate<Area2D>();
-				AddChild(spawned);
-				spawned.Position = Vector2.Zero;
+				_spawnRoot.AddChild(spawned);
+				spawned.GlobalPosition = _spawnRoot.GlobalPosition;
 			}
 		}
 	}
-
-	// [Rpc(MultiplayerApi.RpcMode.AnyPeer, CallLocal = true)]
-	// void SetEnabledRPC(bool enabled)
-	// {
-	// 	Array<Node> children = GetChildren();
-	// 	foreach (Node child in children)
-	// 	{
-	// 		(child as Node2D).
-	// 	}
-	// }
-
-
 
 }

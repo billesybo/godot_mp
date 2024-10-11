@@ -59,11 +59,16 @@ collision_layer = 3
 shape = SubResource("SegmentShape2D_wyx2u")
 one_way_collision = true
 
-[node name="Node2D" type="Node2D" parent="."]
-position = Vector2(69, -137)
+[node name="Spawner" type="MultiplayerSpawner" parent="." node_paths=PackedStringArray("_spawnRoot")]
+spawn_path = NodePath("../PickupSpawnRoot")
+spawn_limit = 100
 script = ExtResource("2_68le3")
 _activationChance = 0.5
 _spawned = ExtResource("3_x13hq")
+_spawnRoot = NodePath("../PickupSpawnRoot")
+
+[node name="PickupSpawnRoot" type="Node2D" parent="."]
+position = Vector2(-65, -147)
 
 [node name="Area2D" type="Area2D" parent="."]
 monitoring = false
